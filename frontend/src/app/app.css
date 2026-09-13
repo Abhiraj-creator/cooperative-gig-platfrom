@@ -680,19 +680,6 @@ button {
 .problem-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  position: relative;
-  overflow: hidden;
-}
-
-.sliding-problem-highlight {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: var(--accent);
-  pointer-events: none;
-  opacity: 0;
-  z-index: 1;
-  border-right: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 .problem-panel {
@@ -700,22 +687,12 @@ button {
   min-height: 340px;
   padding: 28px;
   position: relative;
-  z-index: 2;
+  overflow: hidden;
 }
 
-.problem-panel span,
-.problem-panel h3,
-.problem-panel p {
-  transition: color 300ms ease;
-}
-
-.problem-panel.is-hovered span {
-  color: rgba(255, 250, 244, 0.8) !important;
-}
-
-.problem-panel.is-hovered h3,
-.problem-panel.is-hovered p {
-  color: #fffaf4 !important;
+.problem-panel:hover h3,
+.service-tile:hover strong {
+  color: var(--accent);
 }
 
 .problem-panel h3,
@@ -782,6 +759,25 @@ button {
   list-style: none;
   margin: 0;
   padding: 0;
+  position: relative;
+  isolation: isolate;
+}
+
+.service-grid-hover-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  pointer-events: none;
+  opacity: 0;
+  z-index: 1;
+  box-shadow: 0 10px 30px rgba(255, 59, 10, 0.22);
+}
+
+.service-tile {
+  position: relative;
+  z-index: 2;
 }
 
 .service-tile a {
@@ -790,14 +786,29 @@ button {
   gap: 12px;
   min-height: 230px;
   padding: 22px;
+  position: relative;
+  z-index: 2;
+  transition: color 300ms ease, border-color 300ms ease;
 }
 
-.service-tile a:hover,
+.service-tile:hover a,
 .service-tile a:focus-visible {
-  background: var(--surface);
-  border-color: var(--foreground);
+  border-color: var(--accent);
   outline: none;
-  transform: translateY(-3px);
+  color: #fffaf4;
+}
+
+.service-tile:hover .tile-index,
+.service-tile:hover small,
+.service-tile:hover strong,
+.service-tile:hover .tile-action {
+  color: #fffaf4;
+}
+
+.service-tile:hover .tile-icon {
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #fffaf4;
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .tile-icon {
@@ -807,6 +818,7 @@ button {
   height: 56px;
   place-items: center;
   width: 56px;
+  transition: border-color 300ms ease, background 300ms ease, color 300ms ease;
 }
 
 .service-tile strong {
@@ -814,6 +826,7 @@ button {
   font-size: 1.75rem;
   line-height: 1;
   text-transform: uppercase;
+  transition: color 300ms ease;
 }
 
 .tile-action {
@@ -825,6 +838,39 @@ button {
   gap: 8px;
   margin-top: auto;
   text-transform: uppercase;
+  transition: color 300ms ease;
+}
+
+.matching-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 24px;
+}
+
+.matching-illustration {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+  padding-left: 8px;
+}
+
+.matching-image {
+  
+  +height: 380px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  filter: contrast(0.95) grayscale(1) sepia(0.1);
+  opacity: 0.9;
+  transition: opacity 400ms ease, filter 400ms ease, transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.matching-illustration:hover .matching-image {
+  opacity: 1;
+  filter: contrast(1.08) grayscale(1) sepia(0.05);
 }
 
 .matching-grid {
@@ -941,21 +987,46 @@ button {
   text-transform: uppercase;
 }
 
-.worker-bar i {
-  background: linear-gradient(90deg, var(--accent) calc(var(--after) * 10%), var(--surface) 0);
+.worker-bar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.worker-bar-header small {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.worker-bar-track {
+  background: var(--surface);
   border: 1px solid var(--border);
   display: block;
   height: 28px;
   position: relative;
+  overflow: visible;
 }
 
-.worker-bar i::after {
+.worker-bar-fill {
+  background: var(--accent);
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: left center;
+  box-shadow: 0 4px 14px rgba(255, 59, 10, 0.25);
+}
+
+.worker-bar-marker {
   border-right: 2px solid var(--foreground);
-  content: "";
   height: 36px;
-  left: calc(var(--before) * 10%);
   position: absolute;
   top: -5px;
+  z-index: 3;
+  transform-origin: bottom center;
 }
 
 .journey-grid {
@@ -1112,7 +1183,6 @@ button {
 
 .final-cta a:hover {
   filter: brightness(1.06);
-  transform: translateY(-6px);
   z-index: 1;
 }
 

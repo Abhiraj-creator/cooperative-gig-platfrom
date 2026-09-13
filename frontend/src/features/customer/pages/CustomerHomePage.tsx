@@ -24,70 +24,143 @@ import { useCustomerServices } from '../hooks/useCustomerServices';
 import { TextReveal, TextRoll } from '@/shared/components';
 import { gsap, useGSAP } from '@/libs/gsap';
 
-function ProblemGridSection() {
-  const gridRef = useRef<HTMLElement>(null);
-  const highlightRef = useRef<HTMLDivElement>(null);
-  const [activeCardIndex, setActiveCardIndex] = useState<number | null>(null);
+function ProblemCard({ number, title, copy }: { number: string; title: string; copy: string }) {
+  const cardRef = useRef<HTMLElement>(null);
+  const lineRef = useRef<HTMLDivElement>(null);
 
-  const { contextSafe } = useGSAP({ scope: gridRef });
+  const { contextSafe } = useGSAP({ scope: cardRef });
 
-  const handleMouseEnterCard = contextSafe((index: number, cardEl: HTMLElement) => {
-    setActiveCardIndex(index);
-    if (!highlightRef.current || !gridRef.current) return;
-
-    const gridRect = gridRef.current.getBoundingClientRect();
-    const cardRect = cardEl.getBoundingClientRect();
-
-    const x = cardRect.left - gridRect.left;
-    const y = cardRect.top - gridRect.top;
-    const width = cardRect.width;
-    const height = cardRect.height;
-
-    gsap.to(highlightRef.current, {
-      x,
-      y,
-      width,
-      height,
-      opacity: 1,
-      duration: 0.42,
+  const handleMouseEnter = contextSafe(() => {
+    if (!lineRef.current) return;
+    gsap.killTweensOf(lineRef.current);
+    gsap.set(lineRef.current, { transformOrigin: 'left center' });
+    gsap.to(lineRef.current, {
+      scaleX: 1,
+      duration: 0.4,
       ease: 'power2.out',
-      overwrite: 'auto',
     });
   });
 
-  const handleMouseLeaveGrid = contextSafe(() => {
-    setActiveCardIndex(null);
-    if (!highlightRef.current) return;
-
-    gsap.to(highlightRef.current, {
-      opacity: 0,
-      duration: 0.35,
+  const handleMouseLeave = contextSafe(() => {
+    if (!lineRef.current) return;
+    gsap.killTweensOf(lineRef.current);
+    gsap.set(lineRef.current, { transformOrigin: 'right center' });
+    gsap.to(lineRef.current, {
+      scaleX: 0,
+      duration: 0.4,
       ease: 'power2.inOut',
     });
   });
 
   return (
-    <section
-      ref={gridRef}
-      className="problem-grid"
-      onMouseLeave={handleMouseLeaveGrid}
+    <article
+      ref={cardRef}
+      className="problem-panel"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
+      <span>{number}</span>
+      <h3>{title}</h3>
+      <p>{copy}</p>
       <div
-        ref={highlightRef}
-        className="sliding-problem-highlight"
+        ref={lineRef}
+        className="problem-card-line"
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          width: '100%',
+          height: '4px',
+          backgroundColor: 'var(--accent)',
+          transform: 'scaleX(0)',
+          transformOrigin: 'left center',
+          pointerEvents: 'none',
+          zIndex: 2,
+        }}
       />
-      {problems.map(([number, title, copy], index) => (
-        <article
-          key={number}
-          className={`problem-panel ${activeCardIndex === index ? 'is-hovered' : ''}`}
-          onMouseEnter={(e) => handleMouseEnterCard(index, e.currentTarget)}
-        >
-          <span>{number}</span>
-          <h3>{title}</h3>
-          <p>{copy}</p>
-        </article>
+    </article>
+  );
+}
+function FairAllocationBoard() {
+  const boardRef = useRef<HTMLDivElement>(null);
+
+  const workers = [
+    { label: 'Worker 01', before: 10, after: 8 },
+    { label: 'Worker 02', before: 6, after: 6 },
+    { label: 'Worker 03', before: 2, after: 6 },
+    { label: 'Worker 04', before: 8, after: 7 },
+    { label: 'Worker 05', before: 3, after: 6 },
+  ];
+
+  useGSAP(
+    () => {
+      if (!boardRef.current) return;
+
+      const bars = boardRef.current.querySelectorAll<HTMLDivElement>('.worker-bar-fill');
+      const markers = boardRef.current.querySelectorAll<HTMLDivElement>('.worker-bar-marker');
+
+      gsap.fromTo(
+        bars,
+        { scaleX: 0 },
+        {
+          scaleX: 1,
+          duration: 1.2,
+          stagger: 0.15,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: boardRef.current,
+            start: 'top 85%',
+            once: true,
+          },
+        }
+      );
+
+      gsap.fromTo(
+        markers,
+        { opacity: 0, scaleY: 0 },
+        {
+          opacity: 1,
+          scaleY: 1,
+          duration: 0.6,
+          stagger: 0.15,
+          delay: 0.3,
+          ease: 'back.out(1.7)',
+          scrollTrigger: {
+            trigger: boardRef.current,
+            start: 'top 85%',
+            once: true,
+          },
+        }
+      );
+    },
+    { scope: boardRef }
+  );
+
+  return (
+    <div ref={boardRef} className="allocation-board" aria-label="Fair workload allocation">
+      {workers.map((worker) => (
+        <div className="worker-bar" key={worker.label}>
+          <div className="worker-bar-header">
+            <span>{worker.label}</span>
+            <small>{worker.after * 10}% Workload</small>
+          </div>
+          <div className="worker-bar-track">
+            <div
+              className="worker-bar-fill"
+              style={{
+                width: `${worker.after * 10}%`,
+              }}
+            />
+            <div
+              className="worker-bar-marker"
+              style={{
+                left: `${worker.before * 10}%`,
+              }}
+            />
+          </div>
+        </div>
       ))}
-    </section>
+    </div>
   );
 }
 
@@ -210,11 +283,20 @@ export function CustomerHomePage() {
       </section>
 
       <section className="matching-section">
-        <div className="section-heading">
-          <p className="eyebrow">Matching engine / 04</p>
-          <TextReveal trigger="scroll" splitBy="words">
-            <h2>The right worker. Not just the nearest one.</h2>
-          </TextReveal>
+        <div className="matching-header">
+          <div className="section-heading">
+            <p className="eyebrow">Matching engine / 04</p>
+            <TextReveal trigger="scroll" splitBy="words">
+              <h2>The right worker. Not just the nearest one.</h2>
+            </TextReveal>
+          </div>
+          <div className="matching-illustration">
+            <img
+              alt="Architectural illustration of matching hub"
+              className="matching-image"
+              src="/images/building.png"
+            />
+          </div>
         </div>
         <div className="matching-grid">
           <article className="request-panel">
@@ -251,14 +333,7 @@ export function CustomerHomePage() {
             <h2>More jobs should not always mean more jobs for the same person.</h2>
           </TextReveal>
         </div>
-        <div className="allocation-board" aria-label="Fair workload allocation">
-          {[10, 6, 2, 8, 3].map((before, index) => (
-            <div className="worker-bar" key={`worker-${index}`}>
-              <span>Worker {String(index + 1).padStart(2, '0')}</span>
-              <i style={{ '--before': before, '--after': [7, 6, 6, 7, 6][index] } as CSSProperties} />
-            </div>
-          ))}
-        </div>
+        <FairAllocationBoard />
       </section>
 
       <section className="journey-section">
