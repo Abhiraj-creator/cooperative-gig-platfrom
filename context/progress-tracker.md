@@ -5,33 +5,41 @@ change.
 
 ## Current Phase
 
-- [e.g. Not started / In progress / Complete]
+- Frontend foundation in progress
 
 ## Current Goal
 
-- [What you are building right now]
+- Establish the React TypeScript frontend folder structure and app wiring.
 
 ## Completed
 
-- None yet.
+- Created Vite React TypeScript frontend under `frontend/`.
+- Added app-level files under `frontend/src/app/`.
+- Added Redux Toolkit store setup with typed Redux hooks.
+- Added React Router setup in `frontend/src/app/app.routes.tsx`.
+- Added feature-based folders for auth, customer, worker, admin, and booking.
+- Added shared component and service folders.
 
 ## In Progress
 
-- None yet.
+- Feature implementation is still placeholder-level.
 
 ## Next Up
 
-- [First unit to build]
+- Replace mock feature services with real API contracts after backend routes are defined.
+- Add UI component library and styling system when the design direction is finalized.
 
 ## Open Questions
 
-- [Any unresolved product or technical decisions]
+- Exact backend API paths are not defined yet.
+- UI library choice is still open.
 
 ## Architecture Decisions
 
-- [Decisions made that affect the system design or
-  data model — include why the decision was made]
+- Frontend uses Vite, React, TypeScript, Redux Toolkit, React Redux, and React Router.
+- Feature folders use `components`, `pages`, `hooks`, `services`, and `state`.
+- The UI layer is split into `components` and `pages` to match common React project conventions.
 
 ## Session Notes
 
-- [Context needed to resume work in the next session]
+- The project proposal defines the main frontend areas as customer, worker, and cooperative federation admin, with booking as a shared transaction flow.
