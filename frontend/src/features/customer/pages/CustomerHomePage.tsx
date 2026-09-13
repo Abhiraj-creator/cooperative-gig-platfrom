@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ArrowRight,
@@ -21,6 +21,75 @@ import {
 } from 'lucide-react';
 import { ServiceCategoryList } from '../components/ServiceCategoryList';
 import { useCustomerServices } from '../hooks/useCustomerServices';
+import { TextReveal, TextRoll } from '@/shared/components';
+import { gsap, useGSAP } from '@/libs/gsap';
+
+function ProblemGridSection() {
+  const gridRef = useRef<HTMLElement>(null);
+  const highlightRef = useRef<HTMLDivElement>(null);
+  const [activeCardIndex, setActiveCardIndex] = useState<number | null>(null);
+
+  const { contextSafe } = useGSAP({ scope: gridRef });
+
+  const handleMouseEnterCard = contextSafe((index: number, cardEl: HTMLElement) => {
+    setActiveCardIndex(index);
+    if (!highlightRef.current || !gridRef.current) return;
+
+    const gridRect = gridRef.current.getBoundingClientRect();
+    const cardRect = cardEl.getBoundingClientRect();
+
+    const x = cardRect.left - gridRect.left;
+    const y = cardRect.top - gridRect.top;
+    const width = cardRect.width;
+    const height = cardRect.height;
+
+    gsap.to(highlightRef.current, {
+      x,
+      y,
+      width,
+      height,
+      opacity: 1,
+      duration: 0.42,
+      ease: 'power2.out',
+      overwrite: 'auto',
+    });
+  });
+
+  const handleMouseLeaveGrid = contextSafe(() => {
+    setActiveCardIndex(null);
+    if (!highlightRef.current) return;
+
+    gsap.to(highlightRef.current, {
+      opacity: 0,
+      duration: 0.35,
+      ease: 'power2.inOut',
+    });
+  });
+
+  return (
+    <section
+      ref={gridRef}
+      className="problem-grid"
+      onMouseLeave={handleMouseLeaveGrid}
+    >
+      <div
+        ref={highlightRef}
+        className="sliding-problem-highlight"
+      />
+      {problems.map(([number, title, copy], index) => (
+        <article
+          key={number}
+          className={`problem-panel ${activeCardIndex === index ? 'is-hovered' : ''}`}
+          onMouseEnter={(e) => handleMouseEnterCard(index, e.currentTarget)}
+        >
+          <span>{number}</span>
+          <h3>{title}</h3>
+          <p>{copy}</p>
+        </article>
+      ))}
+    </section>
+  );
+}
 
 const tickerItems = [
   'Verified workers',
@@ -58,44 +127,35 @@ export function CustomerHomePage() {
       <section className="hero-section blueprint-grid">
         <div className="hero-copy">
           <p className="eyebrow">Cooperative service network / 01</p>
-          <h1>SAHAAY</h1>
-          <p className="hero-tagline">Skilled hands. Fair opportunities. One cooperative network.</p>
-          <p className="hero-text">
-            A cooperative-owned digital marketplace connecting households, communities and
-            institutions with verified skilled workers matched by service, location,
-            availability and workload.
-          </p>
+          <TextReveal trigger="mount" splitBy="chars" duration="1.0">
+            <h1>SAHAAY</h1>
+          </TextReveal>
+          <TextReveal trigger="mount" splitBy="words" delay="0.2">
+            <p className="hero-tagline">Skilled hands. Fair opportunities. One cooperative network.</p>
+          </TextReveal>
+          <TextReveal trigger="mount" splitBy="lines" delay="0.4">
+            <p className="hero-text">
+              A cooperative-owned digital marketplace connecting households, communities and
+              institutions with verified skilled workers matched by service, location,
+              availability and workload.
+            </p>
+          </TextReveal>
           <div className="hero-actions">
             <Link className="primary-action" to="/booking">
-              Request a service <ArrowRight size={18} />
+              <TextRoll splitBy="words">Request a service</TextRoll> <ArrowRight size={18} />
             </Link>
             <Link className="secondary-action" to="/worker">
-              Join as a worker <ArrowRight size={18} />
+              <TextRoll splitBy="words">Join as a worker</TextRoll> <ArrowRight size={18} />
             </Link>
           </div>
         </div>
 
-        <div className="network-board" aria-label="Live cooperative service map">
-          <div className="coordinate-label">X: 1131 / Y: 482</div>
-          <div className="map-road road-one" />
-          <div className="map-road road-two" />
-          <span className="map-node customer-node">
-            <Home size={20} />
-            <small>Customer</small>
-          </span>
-          <span className="map-node worker-node">
-            <UserRoundCheck size={20} />
-            <small>Worker</small>
-          </span>
-          <span className="map-node hub-node">
-            <Building2 size={20} />
-            <small>Hub</small>
-          </span>
-          <div className="match-card">
-            <p>Match found</p>
-            <strong>ETA 14 min</strong>
-            <span>Verified electrician</span>
-          </div>
+        <div className="network-board" aria-label="Cooperative service hub illustration">
+          <img
+            alt="Architectural illustration of a cooperative service hub"
+            className="hero-building"
+            src="/images/hero-image.png"
+          />
         </div>
       </section>
 
@@ -110,7 +170,9 @@ export function CustomerHomePage() {
       <section className="split-section" id="network">
         <div>
           <p className="eyebrow">The problem / 02</p>
-          <h2>Local skill is everywhere. Access is not.</h2>
+          <TextReveal trigger="scroll" splitBy="words">
+            <h2>Local skill is everywhere. Access is not.</h2>
+          </TextReveal>
         </div>
         <p>
           Skilled workers already exist across communities, but cooperative networks need one
@@ -120,18 +182,16 @@ export function CustomerHomePage() {
 
       <section className="problem-grid">
         {problems.map(([number, title, copy]) => (
-          <article className="problem-panel" key={number}>
-            <span>{number}</span>
-            <h3>{title}</h3>
-            <p>{copy}</p>
-          </article>
+          <ProblemCard key={number} number={number} title={title} copy={copy} />
         ))}
       </section>
 
       <section className="service-section" id="services">
         <div className="section-heading">
           <p className="eyebrow">Service index / 03</p>
-          <h2>Tell us what needs to be done.</h2>
+          <TextReveal trigger="scroll" splitBy="words">
+            <h2>Tell us what needs to be done.</h2>
+          </TextReveal>
         </div>
         <form className="service-search" aria-label="Service discovery">
           <label>
@@ -143,7 +203,7 @@ export function CustomerHomePage() {
             <input type="text" placeholder="Your location" />
           </label>
           <button type="button">
-            <LocateFixed size={18} /> Use current location
+            <LocateFixed size={18} /> <TextRoll splitBy="words">Use current location</TextRoll>
           </button>
         </form>
         <ServiceCategoryList services={serviceCategories} />
@@ -152,7 +212,9 @@ export function CustomerHomePage() {
       <section className="matching-section">
         <div className="section-heading">
           <p className="eyebrow">Matching engine / 04</p>
-          <h2>The right worker. Not just the nearest one.</h2>
+          <TextReveal trigger="scroll" splitBy="words">
+            <h2>The right worker. Not just the nearest one.</h2>
+          </TextReveal>
         </div>
         <div className="matching-grid">
           <article className="request-panel">
@@ -185,7 +247,9 @@ export function CustomerHomePage() {
       <section className="fair-section">
         <div>
           <p className="eyebrow">Fair allocation / 05</p>
-          <h2>More jobs should not always mean more jobs for the same person.</h2>
+          <TextReveal trigger="scroll" splitBy="words">
+            <h2>More jobs should not always mean more jobs for the same person.</h2>
+          </TextReveal>
         </div>
         <div className="allocation-board" aria-label="Fair workload allocation">
           {[10, 6, 2, 8, 3].map((before, index) => (
@@ -221,13 +285,15 @@ export function CustomerHomePage() {
             ))}
           </div>
           <div className="preview-actions">
-            <button type="button"><MessageSquareText size={16} /> Chat</button>
-            <button type="button"><Clock3 size={16} /> Track</button>
+            <button type="button"><MessageSquareText size={16} /> <TextRoll splitBy="chars">Chat</TextRoll></button>
+            <button type="button"><Clock3 size={16} /> <TextRoll splitBy="chars">Track</TextRoll></button>
           </div>
         </div>
         <div>
           <p className="eyebrow">Product preview / 07</p>
-          <h2>Booking, tracking and cooperative oversight in one flow.</h2>
+          <TextReveal trigger="scroll" splitBy="words">
+            <h2>Booking, tracking and cooperative oversight in one flow.</h2>
+          </TextReveal>
           <p>
             The public site leads naturally into request creation, worker registration and
             admin visibility without making AI feel like a gimmick.
@@ -254,7 +320,9 @@ export function CustomerHomePage() {
       <section className="use-case-section">
         <div className="section-heading">
           <p className="eyebrow">Use cases / 08</p>
-          <h2>Built for every node in the cooperative network.</h2>
+          <TextReveal trigger="scroll" splitBy="words">
+            <h2>Built for every node in the cooperative network.</h2>
+          </TextReveal>
         </div>
         <div className="tabs" role="tablist" aria-label="Use cases">
           {Object.keys(useCases).map((key) => (
@@ -265,7 +333,7 @@ export function CustomerHomePage() {
               role="tab"
               type="button"
             >
-              {key}
+              <TextRoll splitBy="chars">{key}</TextRoll>
             </button>
           ))}
         </div>
@@ -281,12 +349,12 @@ export function CustomerHomePage() {
         <Link to="/booking">
           <span>Customer</span>
           <strong>Need a skilled hand?</strong>
-          Request a service <ArrowRight size={18} />
+          <TextRoll splitBy="words">Request a service</TextRoll> <ArrowRight size={18} />
         </Link>
         <Link to="/worker">
           <span>Worker</span>
           <strong>Are you skilled?</strong>
-          Join the cooperative <ArrowRight size={18} />
+          <TextRoll splitBy="words">Join the cooperative</TextRoll> <ArrowRight size={18} />
         </Link>
       </section>
 
@@ -301,7 +369,11 @@ export function CustomerHomePage() {
             </div>
           ))}
         </div>
-        <strong className="footer-word">SAHAAY</strong>
+        <strong className="footer-word" aria-label="SAHAAY">
+          {'SAHAAY'.split('').map((letter, index) => (
+            <span data-letter={letter} key={`${letter}-${index}`}>{letter}</span>
+          ))}
+        </strong>
         <p>2026 Cooperative Service Network</p>
       </footer>
     </main>

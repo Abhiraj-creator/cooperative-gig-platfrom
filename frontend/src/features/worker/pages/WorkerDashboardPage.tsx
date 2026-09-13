@@ -1,5 +1,6 @@
 import { WorkerJobRequestList } from '../components/WorkerJobRequestList';
 import { useWorkerJobs } from '../hooks/useWorkerJobs';
+import { TextReveal } from '@/shared/components';
 
 export function WorkerDashboardPage() {
   const { jobRequests } = useWorkerJobs();
@@ -8,7 +9,9 @@ export function WorkerDashboardPage() {
     <main className="page">
       <section className="panel">
         <p className="eyebrow">Worker</p>
-        <h1>Manage Jobs and Availability</h1>
+        <TextReveal trigger="mount" splitBy="words">
+          <h1>Manage Jobs and Availability</h1>
+        </TextReveal>
         <p>
           Review matched job requests, maintain verification details, track
           earnings, and access cooperative welfare support.
