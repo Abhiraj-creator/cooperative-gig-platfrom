@@ -1,4 +1,5 @@
 import type { ServiceMode } from '../types';
+import { TextRoll } from '@/shared/components';
 
 const modes: ServiceMode[] = ['scheduled', 'on-demand', 'emergency'];
 
@@ -17,7 +18,7 @@ export function ServiceModeSelector({ value, onChange }: ServiceModeSelectorProp
           onClick={() => onChange(mode)}
           aria-pressed={value === mode}
         >
-          {mode}
+          <TextRoll splitBy="chars">{mode}</TextRoll>
         </button>
       ))}
     </div>
