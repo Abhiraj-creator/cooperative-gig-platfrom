@@ -3,6 +3,7 @@ import { AdminDashboardPage } from '../features/admin/pages/AdminDashboardPage';
 import { BookingCreatePage } from '../features/booking/pages/BookingCreatePage';
 import { CustomerHomePage } from '../features/customer/pages/CustomerHomePage';
 import { WorkerDashboardPage } from '../features/worker/pages/WorkerDashboardPage';
+import { SettingsPage } from '../features/settings/pages/SettingsPage';
 import { App } from './App';
 import { LoginPage } from '../features/auth/pages/LoginPage';
 import { SignupPage } from '../features/auth/pages/SignupPage';
@@ -45,7 +46,14 @@ export const routes = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+      {
+        path: 'settings',
+        element: (
+          <ProtectedRoute>
+            <SettingsPage />
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
 ]);
-

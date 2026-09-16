@@ -14,21 +14,21 @@
       "category": "Electrical & Smart Home",
       "categoryId": "cat-1",
       "description": "Installation of smart home hub system, 8 z-wave door/window sensors, smart thermostat calibration, and security integration with zero corporate surveillance data collection.",
-      "price": 280,
+      "price": 2400,
       "estimatedHours": 3.5,
       "urgency": "Normal",
-      "location": "Mission District, San Francisco",
+      "location": "Sector 62, Noida",
       "status": "available",
       "customerName": "Elena Rostova",
       "requiredSkill": "Master Electrician",
       "coopFeeSplit": {
-        "workerPayout": 238,
-        "coopReserveFund": 33.6,
-        "platformOps": 8.4
+        "workerPayout": 2040,
+        "coopReserveFund": 288,
+        "platformOps": 72
       },
       "worker": {
         "name": "Marcus Vance",
-        "coopId": "COOP-8842-SF",
+        "coopId": "COOP-8842-IN",
         "rating": 4.98,
         "completedGigs": 142
       }
@@ -39,21 +39,21 @@
       "category": "Electrical & Smart Home",
       "categoryId": "cat-1",
       "description": "Subpanel load calculation, running 50-amp 240V conduit line to garage bay, installing Level 2 EV charging unit with certified load balancing.",
-      "price": 450,
+      "price": 3800,
       "estimatedHours": 5,
       "urgency": "High",
-      "location": "Oakland Hills, East Bay",
+      "location": "Koramangala, Bengaluru",
       "status": "available",
       "customerName": "David Chen",
       "requiredSkill": "Master Electrician",
       "coopFeeSplit": {
-        "workerPayout": 382.5,
-        "coopReserveFund": 54,
-        "platformOps": 13.5
+        "workerPayout": 3230,
+        "coopReserveFund": 456,
+        "platformOps": 114
       },
       "worker": {
         "name": "Carlos Mendoza",
-        "coopId": "COOP-9104-OAK",
+        "coopId": "COOP-9104-BLR",
         "rating": 4.95,
         "completedGigs": 98
       }
@@ -64,21 +64,21 @@
       "category": "Plumbing & Hydraulics",
       "categoryId": "cat-2",
       "description": "Urgent diagnosis of main supply line pressure drop, replacing faulty copper joint, and installing a new brass pressure reducing valve.",
-      "price": 320,
+      "price": 1800,
       "estimatedHours": 3,
       "urgency": "Emergency",
-      "location": "Berkeley Marina Area",
+      "location": "Bandra West, Mumbai",
       "status": "in_progress",
       "customerName": "Rebecca Miller",
       "requiredSkill": "Master Plumber",
       "coopFeeSplit": {
-        "workerPayout": 272,
-        "coopReserveFund": 38.4,
-        "platformOps": 9.6
+        "workerPayout": 1530,
+        "coopReserveFund": 216,
+        "platformOps": 54
       },
       "worker": {
         "name": "Marcus Vance",
-        "coopId": "COOP-8842-SF",
+        "coopId": "COOP-8842-IN",
         "rating": 4.98,
         "completedGigs": 142
       }
@@ -89,21 +89,21 @@
       "category": "Solar & Clean Energy",
       "categoryId": "cat-4",
       "description": "Diagnostic scan of 16-panel solar array, replacing 2 degraded micro-inverters, and verifying grid tie-in safety standards.",
-      "price": 520,
+      "price": 4500,
       "estimatedHours": 6,
       "urgency": "Normal",
-      "location": "Palo Alto, CA",
+      "location": "HSR Layout, Bengaluru",
       "status": "available",
       "customerName": "Apex Innovation Lab",
       "requiredSkill": "Solar Installer",
       "coopFeeSplit": {
-        "workerPayout": 442,
-        "coopReserveFund": 62.4,
-        "platformOps": 15.6
+        "workerPayout": 3825,
+        "coopReserveFund": 540,
+        "platformOps": 135
       },
       "worker": {
         "name": "Amina Sterling",
-        "coopId": "COOP-4421-PA",
+        "coopId": "COOP-4421-BLR",
         "rating": 5.0,
         "completedGigs": 210
       }
@@ -114,21 +114,21 @@
       "category": "Climate & HVAC Maintenance",
       "categoryId": "cat-3",
       "description": "Deep clean of heat pump evaporator coils, refrigerant pressure test, HEPA filter replacement, and acoustic duct sealing.",
-      "price": 210,
+      "price": 1600,
       "estimatedHours": 2.5,
       "urgency": "Normal",
-      "location": "San Mateo, CA",
+      "location": "Connaught Place, New Delhi",
       "status": "completed",
       "customerName": "Robert Higgins",
       "requiredSkill": "HVAC Specialist",
       "coopFeeSplit": {
-        "workerPayout": 178.5,
-        "coopReserveFund": 25.2,
-        "platformOps": 6.3
+        "workerPayout": 1360,
+        "coopReserveFund": 192,
+        "platformOps": 48
       },
       "worker": {
         "name": "Marcus Vance",
-        "coopId": "COOP-8842-SF",
+        "coopId": "COOP-8842-IN",
         "rating": 4.98,
         "completedGigs": 142
       }
@@ -139,21 +139,21 @@
       "category": "Carpentry & Custom Furniture",
       "categoryId": "cat-5",
       "description": "Precision laser-level mounting of 4 heavy-duty walnut floating shelves into solid masonry wall with concealed structural steel brackets.",
-      "price": 190,
+      "price": 1500,
       "estimatedHours": 2,
       "urgency": "Normal",
-      "location": "Hayes Valley, San Francisco",
+      "location": "Indiranagar, Bengaluru",
       "status": "available",
       "customerName": "Sophia Taylor",
       "requiredSkill": "Finish Carpenter",
       "coopFeeSplit": {
-        "workerPayout": 161.5,
-        "coopReserveFund": 22.8,
-        "platformOps": 5.7
+        "workerPayout": 1275,
+        "coopReserveFund": 180,
+        "platformOps": 45
       },
       "worker": {
         "name": "Julian Thorne",
-        "coopId": "COOP-7731-SF",
+        "coopId": "COOP-7731-BLR",
         "rating": 4.92,
         "completedGigs": 76
       }
