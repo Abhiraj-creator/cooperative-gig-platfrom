@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useAuth } from '../../auth/hooks/useAuth';
 import gigsData from '../../../data/gigsData.json';
-import { GigItem } from '../../booking/pages/BookingCreatePage';
-import { DollarSign, Award, Clock, MapPin, CheckCircle, Shield, Briefcase, Zap, X, AlertTriangle } from 'lucide-react';
+import type { GigItem } from '../../booking/pages/BookingCreatePage';
+import { DollarSign, Award, Clock, MapPin, CheckCircle, Shield, Briefcase, X } from 'lucide-react';
 
 export function WorkerDashboardPage() {
   const { user } = useAuth();

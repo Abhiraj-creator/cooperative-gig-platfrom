@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAppDispatch } from '../../../app/hooks';
-import { loginSuccess, UserRole } from '../state/authSlice';
+import { loginSuccess, type UserRole } from '../state/authSlice';
 import { authService, DEMO_CUSTOMER, DEMO_WORKER } from '../services/authService';
 
 export function LoginPage() {
