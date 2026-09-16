@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState} from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { useAuth } from '../../auth/hooks/useAuth';
 import gigsData from '../../../data/gigsData.json';
-import { Search, ShieldCheck, Clock, MapPin, CheckCircle, X, ArrowRight, Calendar, Phone, MessageSquare, CheckCircle2 } from 'lucide-react';
+import { Search, ShieldCheck, Clock, MapPin, CheckCircle, X, ArrowRight, Phone, MessageSquare, CheckCircle2 } from 'lucide-react';
 import { getDisplayName } from '../../../shared/utils/displayName';
 
 export interface GigItem {

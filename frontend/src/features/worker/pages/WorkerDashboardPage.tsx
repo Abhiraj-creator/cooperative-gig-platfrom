@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { useAuth } from '../../auth/hooks/useAuth';
 import gigsData from '../../../data/gigsData.json';
 import type { GigItem } from '../../booking/pages/BookingCreatePage';
-import { IndianRupee, Award, Clock, MapPin, CheckCircle, Shield, Briefcase, X } from 'lucide-react';
+import { IndianRupee, Clock, MapPin, CheckCircle, Shield, Briefcase, X } from 'lucide-react';
 import { getDisplayName } from '../../../shared/utils/displayName';
 
 export function WorkerDashboardPage() {
