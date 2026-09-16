@@ -1,0 +1,162 @@
+{
+  "categories": [
+    { "id": "cat-1", "name": "Electrical & Smart Home", "icon": "⚡", "count": 12 },
+    { "id": "cat-2", "name": "Plumbing & Hydraulics", "icon": "🔧", "count": 8 },
+    { "id": "cat-3", "name": "Climate & HVAC Maintenance", "icon": "❄️", "count": 6 },
+    { "id": "cat-4", "name": "Solar & Clean Energy", "icon": "☀️", "count": 9 },
+    { "id": "cat-5", "name": "Carpentry & Custom Furniture", "icon": "🪚", "count": 7 },
+    { "id": "cat-6", "name": "IT & Mesh Network Setup", "icon": "📡", "count": 11 }
+  ],
+  "gigs": [
+    {
+      "id": "gig-101",
+      "title": "Smart Home Hub & Whole-House Sensor Installation",
+      "category": "Electrical & Smart Home",
+      "categoryId": "cat-1",
+      "description": "Installation of smart home hub system, 8 z-wave door/window sensors, smart thermostat calibration, and security integration with zero corporate surveillance data collection.",
+      "price": 280,
+      "estimatedHours": 3.5,
+      "urgency": "Normal",
+      "location": "Mission District, San Francisco",
+      "status": "available",
+      "customerName": "Elena Rostova",
+      "requiredSkill": "Master Electrician",
+      "coopFeeSplit": {
+        "workerPayout": 238,
+        "coopReserveFund": 33.6,
+        "platformOps": 8.4
+      },
+      "worker": {
+        "name": "Marcus Vance",
+        "coopId": "COOP-8842-SF",
+        "rating": 4.98,
+        "completedGigs": 142
+      }
+    },
+    {
+      "id": "gig-102",
+      "title": "Dual EV Charger 240V Circuit Dedicated Wiring",
+      "category": "Electrical & Smart Home",
+      "categoryId": "cat-1",
+      "description": "Subpanel load calculation, running 50-amp 240V conduit line to garage bay, installing Level 2 EV charging unit with certified load balancing.",
+      "price": 450,
+      "estimatedHours": 5,
+      "urgency": "High",
+      "location": "Oakland Hills, East Bay",
+      "status": "available",
+      "customerName": "David Chen",
+      "requiredSkill": "Master Electrician",
+      "coopFeeSplit": {
+        "workerPayout": 382.5,
+        "coopReserveFund": 54,
+        "platformOps": 13.5
+      },
+      "worker": {
+        "name": "Carlos Mendoza",
+        "coopId": "COOP-9104-OAK",
+        "rating": 4.95,
+        "completedGigs": 98
+      }
+    },
+    {
+      "id": "gig-103",
+      "title": "Emergency Main Line Leak Repair & Pressure Valve Swap",
+      "category": "Plumbing & Hydraulics",
+      "categoryId": "cat-2",
+      "description": "Urgent diagnosis of main supply line pressure drop, replacing faulty copper joint, and installing a new brass pressure reducing valve.",
+      "price": 320,
+      "estimatedHours": 3,
+      "urgency": "Emergency",
+      "location": "Berkeley Marina Area",
+      "status": "in_progress",
+      "customerName": "Rebecca Miller",
+      "requiredSkill": "Master Plumber",
+      "coopFeeSplit": {
+        "workerPayout": 272,
+        "coopReserveFund": 38.4,
+        "platformOps": 9.6
+      },
+      "worker": {
+        "name": "Marcus Vance",
+        "coopId": "COOP-8842-SF",
+        "rating": 4.98,
+        "completedGigs": 142
+      }
+    },
+    {
+      "id": "gig-104",
+      "title": "Rooftop Solar Array Inspection & Micro-Inverter Upgrade",
+      "category": "Solar & Clean Energy",
+      "categoryId": "cat-4",
+      "description": "Diagnostic scan of 16-panel solar array, replacing 2 degraded micro-inverters, and verifying grid tie-in safety standards.",
+      "price": 520,
+      "estimatedHours": 6,
+      "urgency": "Normal",
+      "location": "Palo Alto, CA",
+      "status": "available",
+      "customerName": "Apex Innovation Lab",
+      "requiredSkill": "Solar Installer",
+      "coopFeeSplit": {
+        "workerPayout": 442,
+        "coopReserveFund": 62.4,
+        "platformOps": 15.6
+      },
+      "worker": {
+        "name": "Amina Sterling",
+        "coopId": "COOP-4421-PA",
+        "rating": 5.0,
+        "completedGigs": 210
+      }
+    },
+    {
+      "id": "gig-105",
+      "title": "Heat Pump HVAC Seasonal Tune-Up & Duct Sealing",
+      "category": "Climate & HVAC Maintenance",
+      "categoryId": "cat-3",
+      "description": "Deep clean of heat pump evaporator coils, refrigerant pressure test, HEPA filter replacement, and acoustic duct sealing.",
+      "price": 210,
+      "estimatedHours": 2.5,
+      "urgency": "Normal",
+      "location": "San Mateo, CA",
+      "status": "completed",
+      "customerName": "Robert Higgins",
+      "requiredSkill": "HVAC Specialist",
+      "coopFeeSplit": {
+        "workerPayout": 178.5,
+        "coopReserveFund": 25.2,
+        "platformOps": 6.3
+      },
+      "worker": {
+        "name": "Marcus Vance",
+        "coopId": "COOP-8842-SF",
+        "rating": 4.98,
+        "completedGigs": 142
+      }
+    },
+    {
+      "id": "gig-106",
+      "title": "Custom Hardwood Floating Wall Shelving Installation",
+      "category": "Carpentry & Custom Furniture",
+      "categoryId": "cat-5",
+      "description": "Precision laser-level mounting of 4 heavy-duty walnut floating shelves into solid masonry wall with concealed structural steel brackets.",
+      "price": 190,
+      "estimatedHours": 2,
+      "urgency": "Normal",
+      "location": "Hayes Valley, San Francisco",
+      "status": "available",
+      "customerName": "Sophia Taylor",
+      "requiredSkill": "Finish Carpenter",
+      "coopFeeSplit": {
+        "workerPayout": 161.5,
+        "coopReserveFund": 22.8,
+        "platformOps": 5.7
+      },
+      "worker": {
+        "name": "Julian Thorne",
+        "coopId": "COOP-7731-SF",
+        "rating": 4.92,
+        "completedGigs": 76
+      }
+    }
+  ]
+}
