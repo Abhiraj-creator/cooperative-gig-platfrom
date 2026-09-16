@@ -13,7 +13,8 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import type { ServiceCategory } from '../types';
-import { gsap, useGSAP } from '@/libs/gsap';
+import { gsap, useGSAP } from '../../../libs/gsap';
+
 
 interface ServiceCategoryListProps {
   services: ServiceCategory[];
