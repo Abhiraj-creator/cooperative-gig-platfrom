@@ -1,19 +1,41 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { useAuth } from '../../auth/hooks/useAuth';
 import gigsData from '../../../data/gigsData.json';
 import type { GigItem } from '../../booking/pages/BookingCreatePage';
-import { DollarSign, Award, Clock, MapPin, CheckCircle, Shield, Briefcase, X } from 'lucide-react';
+import { IndianRupee, Clock, MapPin, CheckCircle, Shield, Briefcase, X } from 'lucide-react';
+import { getDisplayName } from '../../../shared/utils/displayName';
 
 export function WorkerDashboardPage() {
   const { user } = useAuth();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [gigs, setGigs] = useState<GigItem[]>(gigsData.gigs as GigItem[]);
-  const [filterTab, setFilterTab] = useState<'all' | 'available' | 'my_gigs' | 'completed'>('all');
   const [selectedGig, setSelectedGig] = useState<GigItem | null>(null);
 
+  const tabParam = (searchParams.get('tab') as 'all' | 'available' | 'my_gigs' | 'completed') || 'all';
+  const [filterTab, setFilterTab] = useState<'all' | 'available' | 'my_gigs' | 'completed'>(tabParam);
+
+  useEffect(() => {
+    if (tabParam) {
+      setFilterTab(tabParam);
+    }
+  }, [tabParam]);
+
+  const handleTabChange = (newTab: 'all' | 'available' | 'my_gigs' | 'completed') => {
+    setFilterTab(newTab);
+    if (newTab === 'all') {
+      setSearchParams({});
+    } else {
+      setSearchParams({ tab: newTab });
+    }
+  };
+
+  const displayName = getDisplayName(user);
+
   // Dynamic earnings calculations
-  const myCompletedGigs = gigs.filter((g) => g.status === 'completed' && g.worker.name === (user?.name || 'Marcus Vance'));
-  const totalEarned = myCompletedGigs.reduce((sum, g) => sum + g.coopFeeSplit.workerPayout, 428);
-  const dividendPoolShare = (totalEarned * 0.14).toFixed(2);
+  const myCompletedGigs = gigs.filter((g) => g.status === 'completed' && g.worker.name === displayName);
+  const totalEarned = myCompletedGigs.reduce((sum, g) => sum + g.coopFeeSplit.workerPayout, 3500);
+  const dividendPoolShare = (totalEarned * 0.14).toFixed(0);
 
   const filteredGigs = gigs.filter((gig) => {
     if (filterTab === 'available') return gig.status === 'available';
@@ -31,8 +53,8 @@ export function WorkerDashboardPage() {
               status: 'in_progress',
               worker: {
                 ...g.worker,
-                name: user?.name || 'Marcus Vance',
-                coopId: user?.coopMemberId || 'COOP-8842-SF',
+                name: displayName,
+                coopId: user?.coopMemberId || 'COOP-8842-IN',
               },
             }
           : g
@@ -58,14 +80,14 @@ export function WorkerDashboardPage() {
       <section className="worker-hero-header">
         <div className="worker-profile-summary">
           <div className="worker-avatar">
-            {(user?.name || 'Marcus Vance').charAt(0)}
+            {displayName.charAt(0).toUpperCase()}
           </div>
           <div>
             <span className="eyebrow">// CO-OP WORKER OWNER PORTAL</span>
-            <h1 className="worker-name">{user?.name || 'Marcus Vance'}</h1>
+            <h1 className="worker-name">{displayName}</h1>
             <div className="worker-badges">
-              <span className="badge-coop">{user?.coopMemberId || 'COOP-8842-SF'}</span>
-              <span className="badge-skill">Master Electrician</span>
+              <span className="badge-coop">{user?.coopMemberId || 'COOP-8842-IN'}</span>
+              <span className="badge-skill">Verified Professional</span>
               <span className="badge-status">● DISPATCH READY</span>
             </div>
           </div>
@@ -76,8 +98,8 @@ export function WorkerDashboardPage() {
           <div className="stat-card">
             <span className="stat-label">TODAY'S PAYOUT (85%)</span>
             <div className="stat-value">
-              <DollarSign size={20} className="stat-icon" />
-              <span>{totalEarned.toFixed(2)}</span>
+              <IndianRupee size={20} className="stat-icon" />
+              <span>{totalEarned.toLocaleString('en-IN')}</span>
             </div>
             <span className="stat-sub font-mono">Direct Bank Transfer</span>
           </div>
@@ -85,8 +107,8 @@ export function WorkerDashboardPage() {
           <div className="stat-card accent-card">
             <span className="stat-label">CO-OP DIVIDEND RESERVE</span>
             <div className="stat-value">
-              <Award size={20} className="stat-icon" />
-              <span>${dividendPoolShare}</span>
+              <IndianRupee size={20} className="stat-icon" />
+              <span>{Number(dividendPoolShare).toLocaleString('en-IN')}</span>
             </div>
             <span className="stat-sub font-mono">Q3 Patronage Share</span>
           </div>
@@ -95,7 +117,7 @@ export function WorkerDashboardPage() {
             <span className="stat-label">COMPLETED DISPATCHES</span>
             <div className="stat-value">
               <Briefcase size={20} className="stat-icon" />
-              <span>{142 + myCompletedGigs.length}</span>
+              <span>{14 + myCompletedGigs.length}</span>
             </div>
             <span className="stat-sub font-mono">100% 5-Star Rating</span>
           </div>
@@ -108,28 +130,28 @@ export function WorkerDashboardPage() {
           <button
             type="button"
             className={`tab-btn ${filterTab === 'all' ? 'active-tab' : ''}`}
-            onClick={() => setFilterTab('all')}
+            onClick={() => handleTabChange('all')}
           >
             ALL DISPATCHES ({gigs.length})
           </button>
           <button
             type="button"
             className={`tab-btn ${filterTab === 'available' ? 'active-tab' : ''}`}
-            onClick={() => setFilterTab('available')}
+            onClick={() => handleTabChange('available')}
           >
             AVAILABLE ({gigs.filter((g) => g.status === 'available').length})
           </button>
           <button
             type="button"
             className={`tab-btn ${filterTab === 'my_gigs' ? 'active-tab' : ''}`}
-            onClick={() => setFilterTab('my_gigs')}
+            onClick={() => handleTabChange('my_gigs')}
           >
             MY ACTIVE GIGS ({gigs.filter((g) => g.status === 'in_progress').length})
           </button>
           <button
             type="button"
             className={`tab-btn ${filterTab === 'completed' ? 'active-tab' : ''}`}
-            onClick={() => setFilterTab('completed')}
+            onClick={() => handleTabChange('completed')}
           >
             COMPLETED ({gigs.filter((g) => g.status === 'completed').length})
           </button>
@@ -161,7 +183,7 @@ export function WorkerDashboardPage() {
             <div className="dispatch-card-footer">
               <div className="payout-box">
                 <span className="payout-label">YOUR PAYOUT (85%):</span>
-                <strong className="payout-amount">${gig.coopFeeSplit.workerPayout.toFixed(2)}</strong>
+                <strong className="payout-amount">₹{gig.coopFeeSplit.workerPayout.toLocaleString('en-IN')}</strong>
               </div>
 
               <div className="card-actions" onClick={(e) => e.stopPropagation()}>
@@ -229,18 +251,18 @@ export function WorkerDashboardPage() {
 
                 <div className="modal-right-payout">
                   <div className="fee-split-table">
-                    <h3>PAYOUT STRUCTURE ($)</h3>
+                    <h3>PAYOUT STRUCTURE (₹)</h3>
                     <div className="fee-row highlight-worker">
                       <span>Your Direct Payout (85%)</span>
-                      <strong>${selectedGig.coopFeeSplit.workerPayout.toFixed(2)}</strong>
+                      <strong>₹{selectedGig.coopFeeSplit.workerPayout.toLocaleString('en-IN')}</strong>
                     </div>
                     <div className="fee-row">
                       <span>Co-op Reserve Fund (12%)</span>
-                      <span>${selectedGig.coopFeeSplit.coopReserveFund.toFixed(2)}</span>
+                      <span>₹{selectedGig.coopFeeSplit.coopReserveFund.toLocaleString('en-IN')}</span>
                     </div>
                     <div className="fee-row">
                       <span>Platform Ops (3%)</span>
-                      <span>${selectedGig.coopFeeSplit.platformOps.toFixed(2)}</span>
+                      <span>₹{selectedGig.coopFeeSplit.platformOps.toLocaleString('en-IN')}</span>
                     </div>
                   </div>
 

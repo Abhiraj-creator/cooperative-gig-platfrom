@@ -1,5 +1,5 @@
-import { ArrowRight, Blocks, LogOut, UserCheck } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { ArrowRight, Blocks, LogOut, UserCheck, Menu, X } from 'lucide-react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState, type ReactNode } from 'react';
 import LocomotiveScroll from 'locomotive-scroll';
 import 'locomotive-scroll/locomotive-scroll.css';
@@ -7,6 +7,9 @@ import TextRoll from './TextRoll';
 import { useAuth } from '../../features/auth/hooks/useAuth';
 import { useAppDispatch } from '../../app/hooks';
 import { logout } from '../../features/auth/state/authSlice';
+import { CustomerNavbar } from './CustomerNavbar';
+import { WorkerNavbar } from './WorkerNavbar';
+import { getDisplayName } from '../utils/displayName';
 
 interface AppShellProps {
   children: ReactNode;
@@ -15,15 +18,24 @@ interface AppShellProps {
 export function AppShell({ children }: AppShellProps) {
   const [headerHidden, setHeaderHidden] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const { isAuthenticated, user } = useAuth();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const displayName = getDisplayName(user);
 
   const handleLogout = () => {
     dispatch(logout());
     navigate('/login');
   };
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [location.pathname]);
 
   // Technical cursor tracking
   useEffect(() => {
@@ -73,10 +85,8 @@ export function AppShell({ children }: AppShellProps) {
       } else {
         const diff = currentScrollY - lastScrollY;
         if (diff > 14) {
-          // Scrolling down -> hide navbar smoothly
           setHeaderHidden(true);
         } else if (diff < -14) {
-          // Scrolling up -> reveal navbar smoothly
           setHeaderHidden(false);
         }
       }
@@ -96,6 +106,28 @@ export function AppShell({ children }: AppShellProps) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // If authenticated, render role-specific navbar instead of public one
+  if (isAuthenticated && user?.role === 'customer') {
+    return (
+      <div className="app-shell" data-scroll-container>
+        <span className="technical-cursor" aria-hidden="true" />
+        <CustomerNavbar />
+        {children}
+      </div>
+    );
+  }
+
+  if (isAuthenticated && user?.role === 'worker') {
+    return (
+      <div className="app-shell" data-scroll-container>
+        <span className="technical-cursor" aria-hidden="true" />
+        <WorkerNavbar />
+        {children}
+      </div>
+    );
+  }
+
+  // ─── Public Navbar (unauthenticated / landing page) ───────────────────────
   return (
     <div className="app-shell" data-scroll-container>
       <span className="technical-cursor" aria-hidden="true" />
@@ -104,7 +136,7 @@ export function AppShell({ children }: AppShellProps) {
           isScrolled ? 'header-scrolled' : ''
         }`}
       >
-        <Link className="brand-mark" to={user?.role === 'worker' ? '/worker' : '/customer'} aria-label="SAHAAY home">
+        <Link className="brand-mark" to="/" aria-label="SAHAAY home">
           <span className="brand-icon" aria-hidden="true">
             <Blocks size={24} strokeWidth={1.7} />
           </span>
@@ -113,34 +145,51 @@ export function AppShell({ children }: AppShellProps) {
             <small>Cooperative Services Network</small>
           </span>
         </Link>
-        <nav className="app-nav" aria-label="Primary navigation">
-          <div className="nav-menu">
-            <Link className="nav-link" to="/customer">
-              <TextRoll splitBy="chars">Customer</TextRoll> <span className="nav-arrow" aria-hidden="true">↗</span>
-            </Link>
-            <div className="nav-dropdown">
-              <a href="/customer#services"><TextRoll splitBy="words">Browse services</TextRoll></a>
-              <Link to="/booking"><TextRoll splitBy="words">Request a service</TextRoll></Link>
-            </div>
-          </div>
-          <div className="nav-menu">
-            <Link className="nav-link" to="/worker">
-              <TextRoll splitBy="chars">Worker Co-op</TextRoll> <span className="nav-arrow" aria-hidden="true">↗</span>
-            </Link>
-            <div className="nav-dropdown">
-              <Link to="/worker"><TextRoll splitBy="words">Worker Dashboard</TextRoll></Link>
-              <Link to="/signup/worker"><TextRoll splitBy="words">Join as Member</TextRoll></Link>
-            </div>
-          </div>
-          <div className="nav-menu"><Link className="nav-link" to="/admin"><TextRoll splitBy="chars">Admin</TextRoll></Link></div>
 
-          {/* Auth State Component */}
+        <nav className="app-nav" aria-label="Primary navigation">
+          {/* How it works */}
+          <div className="nav-menu">
+            <a className="nav-link" href="/#network">
+              <TextRoll splitBy="chars">How it works</TextRoll>
+              <span className="nav-arrow" aria-hidden="true">↗</span>
+            </a>
+            <div className="nav-dropdown">
+              <a href="/#network">Platform overview</a>
+              <a href="/#services">Browse services</a>
+            </div>
+          </div>
+
+          {/* Services */}
+          <div className="nav-menu">
+            <a className="nav-link" href="/#services">
+              <TextRoll splitBy="chars">Services</TextRoll>
+              <span className="nav-arrow" aria-hidden="true">↗</span>
+            </a>
+            <div className="nav-dropdown">
+              <a href="/#services">All categories</a>
+              <a href="/#network">Matching engine</a>
+            </div>
+          </div>
+
+          {/* Join as Worker */}
+          <div className="nav-menu">
+            <Link className="nav-link" to="/signup/worker">
+              <TextRoll splitBy="chars">Join as Worker</TextRoll>
+              <span className="nav-arrow" aria-hidden="true">↗</span>
+            </Link>
+            <div className="nav-dropdown">
+              <Link to="/signup/worker">Register as member</Link>
+              <Link to="/login">Worker login</Link>
+            </div>
+          </div>
+
+          {/* Auth buttons */}
           {isAuthenticated && user ? (
             <>
               <div className="nav-menu">
                 <span className="nav-link auth-user-badge">
                   <UserCheck size={14} className="user-icon" />
-                  <span className="user-badge-label">{user.name.split(' ')[0]} ({user.role})</span>
+                  <span className="user-badge-label">{displayName} ({user.role})</span>
                 </span>
               </div>
               <button type="button" onClick={handleLogout} className="nav-cta logout-cta" title="Logout session">
@@ -161,10 +210,32 @@ export function AppShell({ children }: AppShellProps) {
               </Link>
             </>
           )}
+
+          {/* Mobile hamburger for public nav */}
+          <button
+            type="button"
+            className={`mobile-menu-btn public-mobile-btn ${mobileOpen ? 'menu-open' : ''}`}
+            onClick={() => setMobileOpen((prev) => !prev)}
+            aria-label="Toggle menu"
+            aria-expanded={mobileOpen}
+          >
+            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
         </nav>
       </header>
+
+      {/* Public Mobile Menu */}
+      {mobileOpen && (
+        <div className="public-mobile-menu">
+          <a href="/#network" className="mobile-nav-link">How it works</a>
+          <a href="/#services" className="mobile-nav-link">Services</a>
+          <Link to="/signup/worker" className="mobile-nav-link">Join as Worker</Link>
+          <Link to="/login" className="mobile-nav-link">Sign In</Link>
+          <Link to="/signup" className="mobile-nav-cta">Join / Register →</Link>
+        </div>
+      )}
+
       {children}
     </div>
   );
 }
-
