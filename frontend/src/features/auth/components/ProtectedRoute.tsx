@@ -1,7 +1,7 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
-import { UserRole } from '../state/authSlice';
+import type { UserRole } from '../state/authSlice';
 
 interface ProtectedRouteProps {
   children: ReactNode;

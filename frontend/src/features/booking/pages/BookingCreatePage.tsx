@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useAuth } from '../../auth/hooks/useAuth';
 import gigsData from '../../../data/gigsData.json';
-import { Search, ShieldCheck, Clock, MapPin, CheckCircle, X, ArrowRight, DollarSign } from 'lucide-react';
+import { Search, ShieldCheck, Clock, MapPin, CheckCircle, X, ArrowRight } from 'lucide-react';
 
 export interface GigItem {
   id: string;

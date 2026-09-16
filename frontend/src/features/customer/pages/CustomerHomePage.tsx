@@ -1,15 +1,12 @@
-import type { CSSProperties } from 'react';
 import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ArrowRight,
   BadgeCheck,
   BarChart3,
-  Building2,
   CheckCircle2,
   Clock3,
   HandCoins,
-  Home,
   Languages,
   LocateFixed,
   MapPinned,
@@ -17,7 +14,6 @@ import {
   Route,
   Search,
   ShieldCheck,
-  UserRoundCheck,
 } from 'lucide-react';
 import { ServiceCategoryList } from '../components/ServiceCategoryList';
 import { useCustomerServices } from '../hooks/useCustomerServices';

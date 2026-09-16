@@ -1,4 +1,4 @@
-import { UserProfile, UserRole } from '../state/authSlice';
+import type { UserProfile, UserRole } from '../state/authSlice';
 
 export const DEMO_CUSTOMER: UserProfile = {
   id: 'cust-101',

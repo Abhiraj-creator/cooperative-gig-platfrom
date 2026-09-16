@@ -1,4 +1,4 @@
-import { createBrowserRouter, Navigate } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 import { AdminDashboardPage } from '../features/admin/pages/AdminDashboardPage';
 import { BookingCreatePage } from '../features/booking/pages/BookingCreatePage';
 import { CustomerHomePage } from '../features/customer/pages/CustomerHomePage';
