@@ -1,30 +1,30 @@
 {
   "categories": [
-    { "id": "cat-1", "name": "Electrical & Smart Home", "icon": "⚡", "count": 12 },
-    { "id": "cat-2", "name": "Plumbing & Hydraulics", "icon": "🔧", "count": 8 },
-    { "id": "cat-3", "name": "Climate & HVAC Maintenance", "icon": "❄️", "count": 6 },
-    { "id": "cat-4", "name": "Solar & Clean Energy", "icon": "☀️", "count": 9 },
-    { "id": "cat-5", "name": "Carpentry & Custom Furniture", "icon": "🪚", "count": 7 },
-    { "id": "cat-6", "name": "IT & Mesh Network Setup", "icon": "📡", "count": 11 }
+    { "id": "cat-1", "name": "Electrical", "icon": "⚡", "count": 12 },
+    { "id": "cat-2", "name": "Plumbing", "icon": "🔧", "count": 8 },
+    { "id": "cat-3", "name": "AC & Appliance Repair", "icon": "❄️", "count": 6 },
+    { "id": "cat-4", "name": "Cleaning Services", "icon": "🧹", "count": 9 },
+    { "id": "cat-5", "name": "Carpentry", "icon": "🪚", "count": 7 },
+    { "id": "cat-6", "name": "Painting & Decor", "icon": "🎨", "count": 11 }
   ],
   "gigs": [
     {
       "id": "gig-101",
-      "title": "Smart Home Hub & Whole-House Sensor Installation",
-      "category": "Electrical & Smart Home",
+      "title": "Ceiling Fan Installation & Switch Repair",
+      "category": "Electrical",
       "categoryId": "cat-1",
-      "description": "Installation of smart home hub system, 8 z-wave door/window sensors, smart thermostat calibration, and security integration with zero corporate surveillance data collection.",
-      "price": 2400,
-      "estimatedHours": 3.5,
+      "description": "Installation of a new ceiling fan and fixing a faulty light switch in the living room.",
+      "price": 400,
+      "estimatedHours": 1.5,
       "urgency": "Normal",
       "location": "Sector 62, Noida",
       "status": "available",
       "customerName": "Arjun Verma",
-      "requiredSkill": "Master Electrician",
+      "requiredSkill": "Electrician",
       "coopFeeSplit": {
-        "workerPayout": 2040,
-        "coopReserveFund": 288,
-        "platformOps": 72
+        "workerPayout": 340,
+        "coopReserveFund": 40,
+        "platformOps": 20
       },
       "worker": {
         "name": "Rajesh Kumar",
@@ -37,21 +37,21 @@
     },
     {
       "id": "gig-102",
-      "title": "Dual EV Charger 240V Circuit Dedicated Wiring",
-      "category": "Electrical & Smart Home",
-      "categoryId": "cat-1",
-      "description": "Subpanel load calculation, running 50-amp 240V conduit line to garage bay, installing Level 2 EV charging unit with certified load balancing.",
-      "price": 3800,
-      "estimatedHours": 5,
+      "title": "Leaking Kitchen Tap Repair",
+      "category": "Plumbing",
+      "categoryId": "cat-2",
+      "description": "Fixing a continuous drip from the kitchen sink faucet and checking the under-sink pipe for leaks.",
+      "price": 300,
+      "estimatedHours": 1,
       "urgency": "High",
       "location": "Koramangala, Bengaluru",
       "status": "available",
       "customerName": "Rahul Desai",
-      "requiredSkill": "Master Electrician",
+      "requiredSkill": "Plumber",
       "coopFeeSplit": {
-        "workerPayout": 3230,
-        "coopReserveFund": 456,
-        "platformOps": 114
+        "workerPayout": 255,
+        "coopReserveFund": 30,
+        "platformOps": 15
       },
       "worker": {
         "name": "Amit Singh",
@@ -64,21 +64,21 @@
     },
     {
       "id": "gig-103",
-      "title": "Emergency Main Line Leak Repair & Pressure Valve Swap",
-      "category": "Plumbing & Hydraulics",
+      "title": "Bathroom Drain Unblocking",
+      "category": "Plumbing",
       "categoryId": "cat-2",
-      "description": "Urgent diagnosis of main supply line pressure drop, replacing faulty copper joint, and installing a new brass pressure reducing valve.",
-      "price": 1800,
-      "estimatedHours": 3,
+      "description": "Clearing a blocked drain in the master bathroom and removing accumulated debris.",
+      "price": 350,
+      "estimatedHours": 1,
       "urgency": "Emergency",
       "location": "Bandra West, Mumbai",
       "status": "in_progress",
       "customerName": "Siddharth Rao",
-      "requiredSkill": "Master Plumber",
+      "requiredSkill": "Plumber",
       "coopFeeSplit": {
-        "workerPayout": 1530,
-        "coopReserveFund": 216,
-        "platformOps": 54
+        "workerPayout": 297,
+        "coopReserveFund": 35,
+        "platformOps": 18
       },
       "worker": {
         "name": "Rajesh Kumar",
@@ -91,21 +91,21 @@
     },
     {
       "id": "gig-104",
-      "title": "Rooftop Solar Array Inspection & Micro-Inverter Upgrade",
-      "category": "Solar & Clean Energy",
-      "categoryId": "cat-4",
-      "description": "Diagnostic scan of 16-panel solar array, replacing 2 degraded micro-inverters, and verifying grid tie-in safety standards.",
-      "price": 4500,
-      "estimatedHours": 6,
+      "title": "Fixing Broken Door Hinges",
+      "category": "Carpentry",
+      "categoryId": "cat-5",
+      "description": "Repairing wooden bedroom door hinges that are making noise and not closing properly.",
+      "price": 500,
+      "estimatedHours": 2,
       "urgency": "Normal",
       "location": "HSR Layout, Bengaluru",
       "status": "available",
       "customerName": "Karan Patel",
-      "requiredSkill": "Solar Installer",
+      "requiredSkill": "Carpenter",
       "coopFeeSplit": {
-        "workerPayout": 3825,
-        "coopReserveFund": 540,
-        "platformOps": 135
+        "workerPayout": 425,
+        "coopReserveFund": 50,
+        "platformOps": 25
       },
       "worker": {
         "name": "Vikram Sharma",
@@ -118,21 +118,21 @@
     },
     {
       "id": "gig-105",
-      "title": "Heat Pump HVAC Seasonal Tune-Up & Duct Sealing",
-      "category": "Climate & HVAC Maintenance",
+      "title": "AC Routine Service & Cleaning",
+      "category": "AC & Appliance Repair",
       "categoryId": "cat-3",
-      "description": "Deep clean of heat pump evaporator coils, refrigerant pressure test, HEPA filter replacement, and acoustic duct sealing.",
-      "price": 1600,
-      "estimatedHours": 2.5,
+      "description": "Deep cleaning of the AC indoor unit filters, checking refrigerant levels, and general maintenance for better cooling.",
+      "price": 600,
+      "estimatedHours": 1.5,
       "urgency": "Normal",
       "location": "Connaught Place, New Delhi",
       "status": "completed",
       "customerName": "Anil Kapoor",
-      "requiredSkill": "HVAC Specialist",
+      "requiredSkill": "AC Technician",
       "coopFeeSplit": {
-        "workerPayout": 1360,
-        "coopReserveFund": 192,
-        "platformOps": 48
+        "workerPayout": 510,
+        "coopReserveFund": 60,
+        "platformOps": 30
       },
       "worker": {
         "name": "Sanjay Gupta",
@@ -145,21 +145,21 @@
     },
     {
       "id": "gig-106",
-      "title": "Custom Hardwood Floating Wall Shelving Installation",
-      "category": "Carpentry & Custom Furniture",
-      "categoryId": "cat-5",
-      "description": "Precision laser-level mounting of 4 heavy-duty walnut floating shelves into solid masonry wall with concealed structural steel brackets.",
-      "price": 1500,
-      "estimatedHours": 2,
+      "title": "Washing Machine Water Pipe Replacement",
+      "category": "AC & Appliance Repair",
+      "categoryId": "cat-3",
+      "description": "Replacing a worn-out water inlet pipe for a fully automatic washing machine.",
+      "price": 250,
+      "estimatedHours": 0.5,
       "urgency": "Normal",
       "location": "Indiranagar, Bengaluru",
       "status": "available",
       "customerName": "Deepak Yadav",
-      "requiredSkill": "Finish Carpenter",
+      "requiredSkill": "Appliance Technician",
       "coopFeeSplit": {
-        "workerPayout": 1275,
-        "coopReserveFund": 180,
-        "platformOps": 45
+        "workerPayout": 212,
+        "coopReserveFund": 25,
+        "platformOps": 13
       },
       "worker": {
         "name": "Manoj Tiwari",

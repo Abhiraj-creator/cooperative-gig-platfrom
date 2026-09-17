@@ -11,7 +11,7 @@ export function CustomerSignupPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [location, setLocation] = useState('Mumbai, MH');
+  const [location, setLocation] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -27,7 +27,7 @@ export function CustomerSignupPage() {
       });
 
       dispatch(loginSuccess(user));
-      navigate('/customer');
+      navigate('/booking');
     } catch (err) {
       console.error('Customer signup error', err);
     } finally {
@@ -102,7 +102,7 @@ export function CustomerSignupPage() {
               type="text"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              placeholder="Mumbai, MH"
+              placeholder="Enter full service address"
               className="tech-input"
               required
             />

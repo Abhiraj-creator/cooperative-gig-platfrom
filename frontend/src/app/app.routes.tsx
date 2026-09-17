@@ -10,18 +10,19 @@ import { SignupPage } from '../features/auth/pages/SignupPage';
 import { CustomerSignupPage } from '../features/auth/pages/CustomerSignupPage';
 import { WorkerSignupPage } from '../features/auth/pages/WorkerSignupPage';
 import { ProtectedRoute } from '../features/auth/components/ProtectedRoute';
+import { GuestRoute } from '../features/auth/components/GuestRoute';
 
 export const routes = createBrowserRouter([
   {
     path: '/',
     element: <App />,
     children: [
-      { index: true, element: <CustomerHomePage /> },
-      { path: 'login', element: <LoginPage /> },
-      { path: 'signup', element: <SignupPage /> },
-      { path: 'signup/customer', element: <CustomerSignupPage /> },
-      { path: 'signup/worker', element: <WorkerSignupPage /> },
-      { path: 'customer', element: <CustomerHomePage /> },
+      { index: true, element: <GuestRoute><CustomerHomePage /></GuestRoute> },
+      { path: 'login', element: <GuestRoute><LoginPage /></GuestRoute> },
+      { path: 'signup', element: <GuestRoute><SignupPage /></GuestRoute> },
+      { path: 'signup/customer', element: <GuestRoute><CustomerSignupPage /></GuestRoute> },
+      { path: 'signup/worker', element: <GuestRoute><WorkerSignupPage /></GuestRoute> },
+      { path: 'customer', element: <GuestRoute><CustomerHomePage /></GuestRoute> },
       {
         path: 'worker',
         element: (
@@ -57,3 +58,4 @@ export const routes = createBrowserRouter([
     ],
   },
 ]);
+

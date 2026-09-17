@@ -7,3 +7,11 @@ export async function fetchAdminQueues(): Promise<AdminQueueSummary[]> {
     { id: 'disputes', label: 'Disputes', count: 3 },
   ];
 }
+
+export async function fetchPendingWorkers() {
+  return [
+    { id: 'wrk-101', name: 'Ramesh Kumar', location: 'Noida', isApproved: false },
+    { id: 'wrk-102', name: 'Suresh Raina', location: 'Mumbai', isApproved: false },
+    { id: 'wrk-103', name: 'Amit Singh', location: 'Pune', isApproved: true },
+  ];
+}

@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAppDispatch } from '../../../app/hooks';
 import { loginSuccess, type UserRole } from '../state/authSlice';
-import { authService, DEMO_CUSTOMER, DEMO_WORKER } from '../services/authService';
-
+import { authService, DEMO_CUSTOMER, DEMO_WORKER, DEMO_ADMIN } from '../services/authService';
 export function LoginPage() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -16,7 +15,9 @@ export function LoginPage() {
   const handleRoleSelect = (role: UserRole) => {
     setSelectedRole(role);
     if (!email) {
-      setEmail(role === 'worker' ? 'marcus.worker@coopgig.org' : 'sarah.customer@coopgig.org');
+      if (role === 'worker') setEmail('marcus.worker@coopgig.org');
+      else if (role === 'admin') setEmail('admin@coopgig.org');
+      else setEmail('sarah.customer@coopgig.org');
     }
   };
 
@@ -35,6 +36,8 @@ export function LoginPage() {
 
       if (user.role === 'worker') {
         navigate('/worker');
+      } else if (user.role === 'admin') {
+        navigate('/admin');
       } else {
         navigate('/booking');
       }
@@ -46,9 +49,15 @@ export function LoginPage() {
   };
 
   const handleDemoLogin = (role: UserRole) => {
-    const demoUser = role === 'worker' ? DEMO_WORKER : DEMO_CUSTOMER;
+    let demoUser = DEMO_CUSTOMER;
+    if (role === 'worker') demoUser = DEMO_WORKER;
+    if (role === 'admin') demoUser = DEMO_ADMIN;
+    
     dispatch(loginSuccess(demoUser));
-    navigate(role === 'worker' ? '/worker' : '/booking');
+    
+    if (role === 'worker') navigate('/worker');
+    else if (role === 'admin') navigate('/admin');
+    else navigate('/booking');
   };
 
   return (
@@ -59,46 +68,36 @@ export function LoginPage() {
           <div className="auth-hero-content">
             <span className="eyebrow">// AUTHENTICATION PROTOCOL</span>
             <h1 className="auth-title">
-              {selectedRole === 'worker' ? (
-                <>
-                  WORKER <span className="text-highlight">MEMBER</span> HUB.
-                </>
-              ) : (
-                <>
-                  CUSTOMER <span className="text-highlight">SERVICE</span> ACCESS.
-                </>
-              )}
+              {selectedRole === 'worker' && <>WORKER <span className="text-highlight">MEMBER</span> HUB.</>}
+              {selectedRole === 'customer' && <>CUSTOMER <span className="text-highlight">SERVICE</span> ACCESS.</>}
+              {selectedRole === 'admin' && <>FEDERATION <span className="text-highlight">ADMIN</span> PANEL.</>}
             </h1>
             <p className="auth-description">
-              {selectedRole === 'worker'
-                ? 'Access your cooperative earnings dashboard, view incoming service dispatches, and manage your dividend shares in real-time.'
-                : 'Connect with verified worker-owners, schedule transparent gig services, and view your zero-markup cost breakdown.'}
+              {selectedRole === 'worker' && 'Access your cooperative earnings dashboard, view incoming service dispatches, and manage your dividend shares in real-time.'}
+              {selectedRole === 'customer' && 'Connect with verified worker-owners, schedule transparent gig services, and view your zero-markup cost breakdown.'}
+              {selectedRole === 'admin' && 'Govern platform operations, verify worker credentials, and oversee cooperative disputes.'}
             </p>
 
             <div className="auth-features-list">
-              {selectedRole === 'worker' ? (
+              {selectedRole === 'worker' && (
                 <>
-                  <div className="auth-feature-tag">
-                    <span className="tag-icon">⚡</span> 100% Direct Worker Earnings
-                  </div>
-                  <div className="auth-feature-tag">
-                    <span className="tag-icon">📊</span> Co-op Dividend Governance
-                  </div>
-                  <div className="auth-feature-tag">
-                    <span className="tag-icon">🛡️</span> Verified Trade Certification
-                  </div>
+                  <div className="auth-feature-tag"><span className="tag-icon">⚡</span> 100% Direct Worker Earnings</div>
+                  <div className="auth-feature-tag"><span className="tag-icon">📊</span> Co-op Dividend Governance</div>
+                  <div className="auth-feature-tag"><span className="tag-icon">🛡️</span> Verified Trade Certification</div>
                 </>
-              ) : (
+              )}
+              {selectedRole === 'customer' && (
                 <>
-                  <div className="auth-feature-tag">
-                    <span className="tag-icon">🔍</span> Instant Algorithmic Gig Matching
-                  </div>
-                  <div className="auth-feature-tag">
-                    <span className="tag-icon">💳</span> Transparent Price Guarantee
-                  </div>
-                  <div className="auth-feature-tag">
-                    <span className="tag-icon">🌱</span> Supporting Local Worker Cooperatives
-                  </div>
+                  <div className="auth-feature-tag"><span className="tag-icon">🔍</span> Instant Algorithmic Gig Matching</div>
+                  <div className="auth-feature-tag"><span className="tag-icon">💳</span> Transparent Price Guarantee</div>
+                  <div className="auth-feature-tag"><span className="tag-icon">🌱</span> Supporting Local Worker Cooperatives</div>
+                </>
+              )}
+              {selectedRole === 'admin' && (
+                <>
+                  <div className="auth-feature-tag"><span className="tag-icon">✅</span> Worker Verification Approvals</div>
+                  <div className="auth-feature-tag"><span className="tag-icon">📈</span> Platform Analytics & Treasury</div>
+                  <div className="auth-feature-tag"><span className="tag-icon">⚖️</span> Dispute Resolution Operations</div>
                 </>
               )}
             </div>
@@ -121,6 +120,13 @@ export function LoginPage() {
                 >
                   🛠️ LOGIN AS DEMO WORKER
                 </button>
+                <button
+                  type="button"
+                  className={`demo-btn ${selectedRole === 'admin' ? 'active-demo' : ''}`}
+                  onClick={() => handleDemoLogin('admin')}
+                >
+                  🛡️ LOGIN AS DEMO ADMIN
+                </button>
               </div>
             </div>
           </div>
@@ -140,7 +146,7 @@ export function LoginPage() {
                   className={`role-tab ${selectedRole === 'customer' ? 'active-customer' : ''}`}
                   onClick={() => handleRoleSelect('customer')}
                 >
-                  CUSTOMER USER
+                  CUSTOMER
                 </button>
                 <button
                   type="button"
@@ -149,7 +155,16 @@ export function LoginPage() {
                   className={`role-tab ${selectedRole === 'worker' ? 'active-worker' : ''}`}
                   onClick={() => handleRoleSelect('worker')}
                 >
-                  WORKER USER
+                  WORKER
+                </button>
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={selectedRole === 'admin'}
+                  className={`role-tab ${selectedRole === 'admin' ? 'active-admin' : ''}`}
+                  onClick={() => handleRoleSelect('admin')}
+                >
+                  ADMIN
                 </button>
               </div>
             </div>
@@ -171,7 +186,7 @@ export function LoginPage() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder={selectedRole === 'worker' ? 'marcus.worker@coopgig.org' : 'sarah.customer@coopgig.org'}
+                  placeholder={selectedRole === 'worker' ? 'marcus.worker@coopgig.org' : selectedRole === 'admin' ? 'admin@coopgig.org' : 'sarah.customer@coopgig.org'}
                   className="tech-input"
                   required
                 />
