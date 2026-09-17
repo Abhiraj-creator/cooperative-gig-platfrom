@@ -12,6 +12,7 @@ export interface UserProfile {
   skills?: string[];
   hourlyRate?: number;
   location?: string;
+  isApproved?: boolean;
 }
 
 interface AuthState {

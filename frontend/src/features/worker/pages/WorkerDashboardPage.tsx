@@ -8,6 +8,17 @@ import { getDisplayName } from '../../../shared/utils/displayName';
 
 export function WorkerDashboardPage() {
   const { user } = useAuth();
+  // If worker is not approved, show pending notice
+  if (user?.role === 'worker' && user?.isApproved === false) {
+    return (
+      <main className="page worker-dashboard-container">
+        <div className="auth-form-wrapper">
+          <h2 className="eyebrow">Account Pending Approval</h2>
+          <p>Your worker account is awaiting admin approval. You will be able to accept and complete gigs once approved.</p>
+        </div>
+      </main>
+    );
+  }
   const [searchParams, setSearchParams] = useSearchParams();
   const [gigs, setGigs] = useState<GigItem[]>(gigsData.gigs as GigItem[]);
   const [selectedGig, setSelectedGig] = useState<GigItem | null>(null);

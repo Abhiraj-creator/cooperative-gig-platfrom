@@ -1,6 +1,7 @@
 import { AdminQueueList } from '../components/AdminQueueList';
+import { WorkerApprovalList } from '../components/WorkerApprovalList';
 import { useAdminQueues } from '../hooks/useAdminQueues';
-import { TextReveal } from '@/shared/components';
+import { TextReveal } from '../../../shared/components';
 
 export function AdminDashboardPage() {
   const { queues } = useAdminQueues();
@@ -17,6 +18,8 @@ export function AdminDashboardPage() {
           management, bookings, payments, disputes, analytics, and audit.
         </p>
         <AdminQueueList queues={queues} />
+        
+        <WorkerApprovalList />
       </section>
     </main>
   );

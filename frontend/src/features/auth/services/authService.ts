@@ -9,6 +9,16 @@ export const DEMO_CUSTOMER: UserProfile = {
   location: 'Mumbai, MH',
 };
 
+export const DEMO_ADMIN: UserProfile = {
+  id: 'admin-001',
+  name: 'Demo Admin',
+  email: 'admin@coopgig.org',
+  role: 'admin',
+  avatarUrl: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=150&auto=format&fit=crop&q=80',
+  location: 'Headquarters',
+  isApproved: true,
+};
+
 export const DEMO_WORKER: UserProfile = {
   id: 'wrk-502',
   name: 'Rajesh Kumar',
@@ -49,6 +59,17 @@ export const authService = {
     // Front-end mock: accepts any credentials without backend validation
     const emailName = params.email ? params.email.split('@')[0] : 'User';
     const formattedName = emailName.charAt(0).toUpperCase() + emailName.slice(1);
+
+    if (params.role === 'admin') {
+      return {
+        id: `admin-${Math.floor(1000 + Math.random() * 9000)}`,
+        name: formattedName || 'System Admin',
+        email: params.email || 'admin@coopgig.org',
+        role: 'admin',
+        location: 'Headquarters',
+        isApproved: true,
+      };
+    }
 
     if (params.role === 'worker') {
       return {
@@ -92,6 +113,7 @@ export const authService = {
       skills: params.skills.length > 0 ? params.skills : ['General Skilled Trade'],
       hourlyRate: params.hourlyRate || 40,
       location: params.location || 'Pune, MH',
-    };
+      isApproved: false,
+    }
   },
 };

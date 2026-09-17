@@ -52,7 +52,7 @@ export function BookingCreatePage() {
   const [customCategory, setCustomCategory] = useState(gigsData.categories[0].id);
   const [customUrgency, setCustomUrgency] = useState('Normal');
   const [customHours, setCustomHours] = useState(1);
-  const [customLocation, setCustomLocation] = useState('Sector 62, Noida');
+  const [customLocation, setCustomLocation] = useState('');
 
   // Pricing Logic
   const baseRate = 500;
@@ -582,6 +582,7 @@ export function BookingCreatePage() {
                     <input
                       type="text"
                       className="tech-input"
+                      placeholder="e.g. 123 Main St, Apt 4B, Mumbai"
                       value={customLocation}
                       onChange={(e) => setCustomLocation(e.target.value)}
                       required

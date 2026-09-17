@@ -19,7 +19,7 @@ export function ProtectedRoute({ children, allowedRoles }: ProtectedRouteProps) 
   if (allowedRoles && userRole && !allowedRoles.includes(userRole)) {
     // Redirect user to their own role dashboard if trying to access unauthorized role route
     if (userRole === 'customer') {
-      return <Navigate to="/customer" replace />;
+      return <Navigate to="/booking" replace />;
     }
     if (userRole === 'worker') {
       return <Navigate to="/worker" replace />;

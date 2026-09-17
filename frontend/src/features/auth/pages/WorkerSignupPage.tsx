@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useAppDispatch } from '../../../app/hooks';
 import { loginSuccess } from '../state/authSlice';
 import { authService } from '../services/authService';
+import { CityDropdown } from '../../../components/CityDropdown';
 
 const SKILL_OPTIONS = [
   'Electrical & Smart Home',
@@ -12,6 +13,9 @@ const SKILL_OPTIONS = [
   'Solar & Clean Energy',
   'IT & Local Network Repair',
   'Appliance Maintenance',
+  'Engineer',
+  'Technician',
+  'Other',
 ];
 
 export function WorkerSignupPage() {
@@ -24,6 +28,7 @@ export function WorkerSignupPage() {
   const [coopMemberId, setCoopMemberId] = useState('');
   const [hourlyRate, setHourlyRate] = useState<number>(45);
   const [selectedSkills, setSelectedSkills] = useState<string[]>(['Electrical & Smart Home']);
+  const [otherSkill, setOtherSkill] = useState('');
   const [location, setLocation] = useState('Pune, MH');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -40,13 +45,17 @@ export function WorkerSignupPage() {
     setIsLoading(true);
 
     try {
+      const compiledSkills = selectedSkills.includes('Other') && otherSkill ?
+        [...selectedSkills.filter(s => s !== 'Other'), otherSkill]
+        : selectedSkills;
+
       const user = await authService.signupWorker({
         name,
         email,
         password,
         coopMemberId: coopMemberId || `COOP-${Math.floor(1000 + Math.random() * 9000)}-IN`,
         hourlyRate,
-        skills: selectedSkills,
+        skills: compiledSkills,
         location,
       });
 
@@ -167,21 +176,28 @@ export function WorkerSignupPage() {
                 );
               })}
             </div>
+            {/* Other skill input */}
+            {selectedSkills.includes('Other') && (
+              <div className="form-group other-skill-input" style={{ marginTop: '12px' }}>
+                <label htmlFor="other-skill" className="mono-label">SPECIFY OTHER SKILL</label>
+                <input
+                  id="other-skill"
+                  type="text"
+                  value={otherSkill}
+                  onChange={(e) => setOtherSkill(e.target.value)}
+                  placeholder="e.g. Painter, Mason"
+                  className="tech-input"
+                  required
+                />
+              </div>
+            )}
           </div>
 
           <div className="form-group">
             <label htmlFor="wrk-location" className="mono-label">
               WORKING REGION / CITY
             </label>
-            <input
-              id="wrk-location"
-              type="text"
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-              placeholder="Pune & PCMC"
-              className="tech-input"
-              required
-            />
+            <CityDropdown value={location} onChange={setLocation} />
           </div>
 
           <button type="submit" className="auth-submit-btn worker-btn" disabled={isLoading}>
