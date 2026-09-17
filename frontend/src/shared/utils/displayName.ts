@@ -8,7 +8,7 @@ import type { UserProfile } from '../../features/auth/state/authSlice';
  * Examples:
  *   "marcus.worker" -> "Marcus"
  *   "abhirajbhati676@gmail.com" -> "Abhiraj Bhati"
- *   "sarah.jenkins" -> "Sarah Jenkins"
+ *   "rahul.sharma" -> "Rahul Sharma"
  */
 export function getDisplayName(user: UserProfile | null, fallback = 'User'): string {
   if (!user) return fallback;

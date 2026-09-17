@@ -19,7 +19,7 @@
       "urgency": "Normal",
       "location": "Sector 62, Noida",
       "status": "available",
-      "customerName": "Elena Rostova",
+      "customerName": "Arjun Verma",
       "requiredSkill": "Master Electrician",
       "coopFeeSplit": {
         "workerPayout": 2040,
@@ -27,10 +27,12 @@
         "platformOps": 72
       },
       "worker": {
-        "name": "Marcus Vance",
+        "name": "Rajesh Kumar",
         "coopId": "COOP-8842-IN",
         "rating": 4.98,
-        "completedGigs": 142
+        "completedGigs": 142,
+        "verified": true,
+        "dp": "/images/photos/image1.jpg"
       }
     },
     {
@@ -44,7 +46,7 @@
       "urgency": "High",
       "location": "Koramangala, Bengaluru",
       "status": "available",
-      "customerName": "David Chen",
+      "customerName": "Rahul Desai",
       "requiredSkill": "Master Electrician",
       "coopFeeSplit": {
         "workerPayout": 3230,
@@ -52,10 +54,12 @@
         "platformOps": 114
       },
       "worker": {
-        "name": "Carlos Mendoza",
+        "name": "Amit Singh",
         "coopId": "COOP-9104-BLR",
         "rating": 4.95,
-        "completedGigs": 98
+        "completedGigs": 98,
+        "verified": true,
+        "dp": "/images/photos/image2.jpg"
       }
     },
     {
@@ -69,7 +73,7 @@
       "urgency": "Emergency",
       "location": "Bandra West, Mumbai",
       "status": "in_progress",
-      "customerName": "Rebecca Miller",
+      "customerName": "Siddharth Rao",
       "requiredSkill": "Master Plumber",
       "coopFeeSplit": {
         "workerPayout": 1530,
@@ -77,10 +81,12 @@
         "platformOps": 54
       },
       "worker": {
-        "name": "Marcus Vance",
+        "name": "Rajesh Kumar",
         "coopId": "COOP-8842-IN",
         "rating": 4.98,
-        "completedGigs": 142
+        "completedGigs": 142,
+        "verified": true,
+        "dp": "/images/photos/image1.jpg"
       }
     },
     {
@@ -94,7 +100,7 @@
       "urgency": "Normal",
       "location": "HSR Layout, Bengaluru",
       "status": "available",
-      "customerName": "Apex Innovation Lab",
+      "customerName": "Karan Patel",
       "requiredSkill": "Solar Installer",
       "coopFeeSplit": {
         "workerPayout": 3825,
@@ -102,10 +108,12 @@
         "platformOps": 135
       },
       "worker": {
-        "name": "Amina Sterling",
+        "name": "Vikram Sharma",
         "coopId": "COOP-4421-BLR",
         "rating": 5.0,
-        "completedGigs": 210
+        "completedGigs": 210,
+        "verified": true,
+        "dp": "/images/photos/image3.jpg"
       }
     },
     {
@@ -119,7 +127,7 @@
       "urgency": "Normal",
       "location": "Connaught Place, New Delhi",
       "status": "completed",
-      "customerName": "Robert Higgins",
+      "customerName": "Anil Kapoor",
       "requiredSkill": "HVAC Specialist",
       "coopFeeSplit": {
         "workerPayout": 1360,
@@ -127,10 +135,12 @@
         "platformOps": 48
       },
       "worker": {
-        "name": "Marcus Vance",
-        "coopId": "COOP-8842-IN",
-        "rating": 4.98,
-        "completedGigs": 142
+        "name": "Sanjay Gupta",
+        "coopId": "COOP-8843-IN",
+        "rating": 4.88,
+        "completedGigs": 112,
+        "verified": true,
+        "dp": "/images/photos/image4.jpg"
       }
     },
     {
@@ -144,7 +154,7 @@
       "urgency": "Normal",
       "location": "Indiranagar, Bengaluru",
       "status": "available",
-      "customerName": "Sophia Taylor",
+      "customerName": "Deepak Yadav",
       "requiredSkill": "Finish Carpenter",
       "coopFeeSplit": {
         "workerPayout": 1275,
@@ -152,10 +162,12 @@
         "platformOps": 45
       },
       "worker": {
-        "name": "Julian Thorne",
+        "name": "Manoj Tiwari",
         "coopId": "COOP-7731-BLR",
         "rating": 4.92,
-        "completedGigs": 76
+        "completedGigs": 76,
+        "verified": false,
+        "dp": "/images/photos/image5.jpg"
       }
     }
   ]
