@@ -2,23 +2,23 @@ import type { UserProfile, UserRole } from '../state/authSlice';
 
 export const DEMO_CUSTOMER: UserProfile = {
   id: 'cust-101',
-  name: 'Sarah Jenkins',
-  email: 'sarah.customer@coopgig.org',
+  name: 'Rahul Sharma',
+  email: 'rahul.customer@coopgig.org',
   role: 'customer',
-  avatarUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80',
-  location: 'San Francisco, CA',
+  avatarUrl: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&auto=format&fit=crop&q=80',
+  location: 'Mumbai, MH',
 };
 
 export const DEMO_WORKER: UserProfile = {
   id: 'wrk-502',
-  name: 'Marcus Vance',
-  email: 'marcus.worker@coopgig.org',
+  name: 'Rajesh Kumar',
+  email: 'rajesh.worker@coopgig.org',
   role: 'worker',
   avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
-  coopMemberId: 'COOP-8842-SF',
+  coopMemberId: 'COOP-8842-IN',
   skills: ['Master Electrician', 'Smart Home Wiring', 'Solar Installation'],
   hourlyRate: 48,
-  location: 'Oakland, CA',
+  location: 'Pune, MH',
 };
 
 export interface LoginParams {
@@ -59,7 +59,7 @@ export const authService = {
         coopMemberId: `COOP-${Math.floor(1000 + Math.random() * 9000)}-VAL`,
         skills: ['Electrical Services', 'Co-op Trade Specialist'],
         hourlyRate: 45,
-        location: 'Bay Area, CA',
+        location: 'Bengaluru, KA',
       };
     }
 
@@ -68,7 +68,7 @@ export const authService = {
       name: formattedName || 'Valued Customer',
       email: params.email || 'customer@coopgig.org',
       role: 'customer',
-      location: 'San Francisco, CA',
+      location: 'Mumbai, MH',
     };
   },
 
@@ -78,7 +78,7 @@ export const authService = {
       name: params.name || 'New Customer',
       email: params.email,
       role: 'customer',
-      location: params.location || 'San Francisco, CA',
+      location: params.location || 'Mumbai, MH',
     };
   },
 
@@ -91,7 +91,7 @@ export const authService = {
       coopMemberId: params.coopMemberId || `COOP-${Math.floor(1000 + Math.random() * 9000)}-MEMBER`,
       skills: params.skills.length > 0 ? params.skills : ['General Skilled Trade'],
       hourlyRate: params.hourlyRate || 40,
-      location: params.location || 'Oakland, CA',
+      location: params.location || 'Pune, MH',
     };
   },
 };

@@ -78,13 +78,18 @@ export function WorkerDashboardPage() {
     <main className="page worker-dashboard-container">
       {/* Worker Hero Header */}
       <section className="worker-hero-header">
-        <div className="worker-profile-summary">
-          <div className="worker-avatar">
-            {displayName.charAt(0).toUpperCase()}
-          </div>
+        <div className="worker-profile-summary" style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+          <img 
+            src="/images/photos/image1.jpg" 
+            alt={displayName} 
+            style={{ width: '80px', height: '80px', borderRadius: '50%', objectFit: 'cover' }}
+          />
           <div>
             <span className="eyebrow">// CO-OP WORKER OWNER PORTAL</span>
-            <h1 className="worker-name">{displayName}</h1>
+            <h1 className="worker-name" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              {displayName}
+              <CheckCircle size={24} style={{ color: '#10b981' }} />
+            </h1>
             <div className="worker-badges">
               <span className="badge-coop">{user?.coopMemberId || 'COOP-8842-IN'}</span>
               <span className="badge-skill">Verified Professional</span>

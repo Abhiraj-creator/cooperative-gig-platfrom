@@ -11,7 +11,7 @@ export function CustomerSignupPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [location, setLocation] = useState('San Francisco, CA');
+  const [location, setLocation] = useState('Mumbai, MH');
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -57,7 +57,7 @@ export function CustomerSignupPage() {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="e.g. Sarah Jenkins"
+              placeholder="e.g. Rahul Sharma"
               className="tech-input"
               required
             />
@@ -72,7 +72,7 @@ export function CustomerSignupPage() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="sarah@example.com"
+              placeholder="rahul@example.com"
               className="tech-input"
               required
             />
@@ -102,7 +102,7 @@ export function CustomerSignupPage() {
               type="text"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              placeholder="San Francisco, CA"
+              placeholder="Mumbai, MH"
               className="tech-input"
               required
             />

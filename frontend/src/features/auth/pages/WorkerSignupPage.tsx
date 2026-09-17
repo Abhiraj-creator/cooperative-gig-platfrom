@@ -24,7 +24,7 @@ export function WorkerSignupPage() {
   const [coopMemberId, setCoopMemberId] = useState('');
   const [hourlyRate, setHourlyRate] = useState<number>(45);
   const [selectedSkills, setSelectedSkills] = useState<string[]>(['Electrical & Smart Home']);
-  const [location, setLocation] = useState('Oakland, CA');
+  const [location, setLocation] = useState('Pune, MH');
   const [isLoading, setIsLoading] = useState(false);
 
   const toggleSkill = (skill: string) => {
@@ -44,7 +44,7 @@ export function WorkerSignupPage() {
         name,
         email,
         password,
-        coopMemberId: coopMemberId || `COOP-${Math.floor(1000 + Math.random() * 9000)}-BAY`,
+        coopMemberId: coopMemberId || `COOP-${Math.floor(1000 + Math.random() * 9000)}-IN`,
         hourlyRate,
         skills: selectedSkills,
         location,
@@ -81,7 +81,7 @@ export function WorkerSignupPage() {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="e.g. Marcus Vance"
+              placeholder="e.g. Rajesh Kumar"
               className="tech-input"
               required
             />
@@ -96,7 +96,7 @@ export function WorkerSignupPage() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="marcus.worker@coopgig.org"
+              placeholder="rajesh.worker@coopgig.org"
               className="tech-input"
               required
             />
@@ -127,7 +127,7 @@ export function WorkerSignupPage() {
                 type="text"
                 value={coopMemberId}
                 onChange={(e) => setCoopMemberId(e.target.value)}
-                placeholder="COOP-8842-SF"
+                placeholder="COOP-8842-IN"
                 className="tech-input"
               />
             </div>
@@ -178,7 +178,7 @@ export function WorkerSignupPage() {
               type="text"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              placeholder="Oakland & East Bay Area"
+              placeholder="Pune & PCMC"
               className="tech-input"
               required
             />

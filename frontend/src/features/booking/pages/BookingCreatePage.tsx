@@ -28,6 +28,8 @@ export interface GigItem {
     coopId: string;
     rating: number;
     completedGigs: number;
+    verified: boolean;
+    dp: string;
   };
 }
 
@@ -42,6 +44,25 @@ export function BookingCreatePage() {
   const [isBooked, setIsBooked] = useState(false);
   const [bookingNotes, setBookingNotes] = useState('');
   const [scheduledDate, setScheduledDate] = useState('2026-09-18T10:00');
+
+  // Custom Request State
+  const [isCustomRequestModalOpen, setIsCustomRequestModalOpen] = useState(false);
+  const [customTitle, setCustomTitle] = useState('');
+  const [customDescription, setCustomDescription] = useState('');
+  const [customCategory, setCustomCategory] = useState(gigsData.categories[0].id);
+  const [customUrgency, setCustomUrgency] = useState('Normal');
+  const [customHours, setCustomHours] = useState(1);
+  const [customLocation, setCustomLocation] = useState('Sector 62, Noida');
+
+  // Pricing Logic
+  const baseRate = 500;
+  const urgencyMultiplier = customUrgency === 'Emergency' ? 2 : customUrgency === 'High' ? 1.5 : 1;
+  const calculatedPrice = customHours * baseRate * urgencyMultiplier;
+  const customFeeSplit = {
+    workerPayout: calculatedPrice * 0.85,
+    coopReserveFund: calculatedPrice * 0.12,
+    platformOps: calculatedPrice * 0.03,
+  };
 
   const displayName = getDisplayName(user, 'Valued Customer');
 
@@ -62,6 +83,36 @@ export function BookingCreatePage() {
   const handleConfirmBooking = (e: React.FormEvent) => {
     e.preventDefault();
     setIsBooked(true);
+  };
+
+  const handleCustomRequestSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const newGig: GigItem = {
+      id: `gig-custom-${Date.now()}`,
+      title: customTitle || 'Custom Service Request',
+      description: customDescription || 'No details provided.',
+      category: gigsData.categories.find(c => c.id === customCategory)?.name || 'Custom',
+      categoryId: customCategory,
+      price: calculatedPrice,
+      estimatedHours: customHours,
+      urgency: customUrgency,
+      location: customLocation,
+      status: 'available',
+      customerName: displayName,
+      requiredSkill: 'Verified Professional',
+      coopFeeSplit: customFeeSplit,
+      worker: {
+        name: 'Rajesh Kumar',
+        coopId: 'COOP-8842-IN',
+        rating: 4.98,
+        completedGigs: 142,
+        verified: true,
+        dp: '/images/photos/image1.jpg'
+      }
+    };
+    setActiveGig(newGig);
+    setIsCustomRequestModalOpen(false);
+    setIsBooked(true); // Jump straight to confirmed screen for demo
   };
 
   return (
@@ -186,10 +237,17 @@ export function BookingCreatePage() {
             </div>
 
             {/* Worker Details Box */}
-            <div className="track-worker-box">
-              <div className="worker-avatar-placeholder">R</div>
-              <div className="worker-info">
-                <h3>Ramesh Kumar</h3>
+            <div className="track-worker-box" style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+              <img 
+                src="/images/photos/image1.jpg" 
+                alt="Ramesh Kumar" 
+                style={{ width: '60px', height: '60px', borderRadius: '50%', objectFit: 'cover' }}
+              />
+              <div className="worker-info" style={{ flex: 1 }}>
+                <h3 style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  Ramesh Kumar
+                  <CheckCircle size={16} style={{ color: '#10b981' }} />
+                </h3>
                 <p>Master Electrician • Co-op Member ID: COOP-8842-IN</p>
                 <div className="rating-badge">★ 4.98 (142 completed jobs)</div>
               </div>
@@ -217,15 +275,26 @@ export function BookingCreatePage() {
         <>
           {/* Filter & Search Bar */}
           <section className="booking-filter-bar">
-            <div className="search-box-wrapper">
-              <Search size={18} className="search-icon" />
-              <input
-                type="text"
-                placeholder="Search — electrical, plumbing, solar, carpentry..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="search-input"
-              />
+            <div className="search-box-wrapper" style={{ display: 'flex', gap: '16px', width: '100%' }}>
+              <div style={{ position: 'relative', flex: 1, display: 'flex', alignItems: 'center' }}>
+                <Search size={18} className="search-icon" style={{ position: 'absolute', left: '16px' }} />
+                <input
+                  type="text"
+                  placeholder="Search — electrical, plumbing, solar, carpentry..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="search-input"
+                  style={{ width: '100%', paddingLeft: '44px' }}
+                />
+              </div>
+              <button
+                type="button"
+                className="book-now-btn"
+                style={{ padding: '0 24px', flexShrink: 0 }}
+                onClick={() => setIsCustomRequestModalOpen(true)}
+              >
+                + Request Custom Service
+              </button>
             </div>
 
             <div className="category-filter-scroll">
@@ -347,12 +416,17 @@ export function BookingCreatePage() {
 
                     <div className="detail-section">
                       <h3>YOUR ASSIGNED WORKER</h3>
-                      <div className="worker-preview-box">
-                        <div className="worker-avatar-placeholder">
-                          {activeGig.worker.name.charAt(0)}
-                        </div>
+                      <div className="worker-preview-box" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                        <img 
+                          src={activeGig.worker.dp} 
+                          alt={activeGig.worker.name}
+                          style={{ width: '48px', height: '48px', borderRadius: '50%', objectFit: 'cover' }}
+                        />
                         <div>
-                          <strong>{activeGig.worker.name}</strong>
+                          <strong style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                            {activeGig.worker.name}
+                            {activeGig.worker.verified && <CheckCircle size={14} style={{ color: '#10b981' }} />}
+                          </strong>
                           <span className="worker-meta">
                             {activeGig.worker.coopId} • ★ {activeGig.worker.rating} ({activeGig.worker.completedGigs} jobs done)
                           </span>
@@ -447,6 +521,127 @@ export function BookingCreatePage() {
                 </button>
               </div>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* Custom Request Modal */}
+      {isCustomRequestModalOpen && (
+        <div className="modal-backdrop" onClick={() => setIsCustomRequestModalOpen(false)}>
+          <div className="modal-card-container" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '800px' }}>
+            <button type="button" className="modal-close-btn" onClick={() => setIsCustomRequestModalOpen(false)}>
+              <X size={20} />
+            </button>
+
+            <div className="modal-content">
+              <div className="modal-header">
+                <span className="eyebrow">// POST A NEW GIG</span>
+                <h2>Request Custom Service</h2>
+                <p style={{ marginTop: '8px', color: 'var(--text-muted)' }}>Describe your needs, set the urgency, and let our verified worker-owners handle the rest.</p>
+              </div>
+
+              <form onSubmit={handleCustomRequestSubmit} className="modal-grid-body" style={{ gap: '32px' }}>
+                <div className="modal-left-details" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                  <div className="form-group">
+                    <label className="mono-label">SERVICE TITLE</label>
+                    <input
+                      type="text"
+                      className="tech-input"
+                      placeholder="e.g. Install new ceiling fan"
+                      value={customTitle}
+                      onChange={(e) => setCustomTitle(e.target.value)}
+                      required
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label className="mono-label">CATEGORY</label>
+                    <select
+                      className="tech-input"
+                      value={customCategory}
+                      onChange={(e) => setCustomCategory(e.target.value)}
+                    >
+                      {gigsData.categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+                    </select>
+                  </div>
+
+                  <div className="form-group">
+                    <label className="mono-label">DETAILED DESCRIPTION</label>
+                    <textarea
+                      className="tech-input tech-textarea"
+                      rows={4}
+                      placeholder="Describe exactly what needs to be done..."
+                      value={customDescription}
+                      onChange={(e) => setCustomDescription(e.target.value)}
+                      required
+                    />
+                  </div>
+                  
+                  <div className="form-group">
+                    <label className="mono-label">SERVICE LOCATION ADDRESS</label>
+                    <input
+                      type="text"
+                      className="tech-input"
+                      value={customLocation}
+                      onChange={(e) => setCustomLocation(e.target.value)}
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="modal-right-payout" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                  <div className="form-group">
+                    <label className="mono-label">URGENCY LEVEL</label>
+                    <select
+                      className="tech-input"
+                      value={customUrgency}
+                      onChange={(e) => setCustomUrgency(e.target.value)}
+                    >
+                      <option value="Normal">Normal (Standard Rate)</option>
+                      <option value="High">High (1.5x Rate)</option>
+                      <option value="Emergency">Emergency (2x Rate)</option>
+                    </select>
+                  </div>
+
+                  <div className="form-group">
+                    <label className="mono-label">ESTIMATED HOURS</label>
+                    <input
+                      type="number"
+                      className="tech-input"
+                      min="0.5"
+                      step="0.5"
+                      value={customHours}
+                      onChange={(e) => setCustomHours(Number(e.target.value))}
+                      required
+                    />
+                  </div>
+
+                  <div className="fee-split-table" style={{ marginTop: 'auto' }}>
+                    <h3>LIVE PRICE ESTIMATE (₹)</h3>
+                    <div className="fee-row highlight-worker">
+                      <span>Worker Payout (85%)</span>
+                      <strong>₹{customFeeSplit.workerPayout.toFixed(2)}</strong>
+                    </div>
+                    <div className="fee-row">
+                      <span>Co-op Reserve (12%)</span>
+                      <span>₹{customFeeSplit.coopReserveFund.toFixed(2)}</span>
+                    </div>
+                    <div className="fee-row">
+                      <span>Platform Ops (3%)</span>
+                      <span>₹{customFeeSplit.platformOps.toFixed(2)}</span>
+                    </div>
+                    <div className="fee-row total-row">
+                      <span>TOTAL ESTIMATE</span>
+                      <strong>₹{calculatedPrice.toFixed(2)}</strong>
+                    </div>
+                  </div>
+
+                  <button type="submit" className="confirm-booking-btn" style={{ width: '100%', marginTop: '16px' }}>
+                    Post Gig & Book Worker →
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       )}
