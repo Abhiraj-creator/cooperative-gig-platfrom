@@ -24,6 +24,7 @@ export function WorkerSignupPage() {
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [coopMemberId, setCoopMemberId] = useState('');
   const [hourlyRate, setHourlyRate] = useState<number>(45);
@@ -106,6 +107,21 @@ export function WorkerSignupPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="rajesh.worker@coopgig.org"
+              className="tech-input"
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="wrk-phone" className="mono-label">
+              PHONE NUMBER
+            </label>
+            <input
+              id="wrk-phone"
+              type="tel"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              placeholder="e.g. +91 98765 43210"
               className="tech-input"
               required
             />

@@ -48,6 +48,23 @@ export function SignupPage() {
               BECOME A WORKER MEMBER →
             </button>
           </div>
+
+          {/* Admin Selection Card */}
+          <div className="signup-role-card" style={{ borderColor: 'var(--accent)', background: 'rgba(var(--accent-rgb, 99,102,241),0.05)', cursor: 'pointer' }} onClick={() => navigate('/signup/admin')}>
+            <div className="card-tag">// FEDERATION ADMINISTRATOR</div>
+            <h2>JOIN AS AN ADMIN</h2>
+            <p>
+              Register as a federation administrator to verify workers, manage platform governance, resolve disputes, and oversee cooperative operations.
+            </p>
+            <ul className="role-perks-list">
+              <li>✓ Worker verification & credential management</li>
+              <li>✓ Platform analytics & treasury oversight</li>
+              <li>✓ Dispute resolution & audit trail access</li>
+            </ul>
+            <button type="button" className="card-action-btn" style={{ borderColor: 'var(--accent)', color: 'var(--accent)' }}>
+              REGISTER AS ADMIN →
+            </button>
+          </div>
         </div>
 
         <div className="signup-already-account">

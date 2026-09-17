@@ -193,17 +193,23 @@ export function CustomerHomePage() {
 
   return (
     <main className="landing-page">
-      <section className="hero-section blueprint-grid">
-        <div className="hero-copy">
-          <p className="eyebrow">Cooperative service network / 01</p>
+      <section className="hero-section blueprint-grid" style={{ position: 'relative', overflow: 'hidden', minHeight: '600px', display: 'grid', gridTemplateColumns: '1fr 1fr', alignItems: 'center' }}>
+        <img
+          alt="Cooperative background"
+          src="/images/main.jpeg"
+          style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0, filter: 'brightness(0.35)' }}
+        />
+        
+        <div className="hero-copy" style={{ position: 'relative', zIndex: 1, padding: '4rem 2rem' }}>
+          <p className="eyebrow" style={{ color: 'var(--accent)' }}>Cooperative service network / 01</p>
           <TextReveal trigger="mount" splitBy="chars" duration="1.0">
-            <h1>SAHAAY</h1>
+            <h1 style={{ color: '#ffffff' }}>SAHKAAR</h1>
           </TextReveal>
           <TextReveal trigger="mount" splitBy="words" delay="0.2">
-            <p className="hero-tagline">Skilled hands. Fair opportunities. One cooperative network.</p>
+            <p className="hero-tagline" style={{ color: '#e2e8f0' }}>Skilled hands. Fair opportunities. One cooperative network.</p>
           </TextReveal>
           <TextReveal trigger="mount" splitBy="lines" delay="0.4">
-            <p className="hero-text">
+            <p className="hero-text" style={{ color: '#cbd5e1' }}>
               A cooperative-owned digital marketplace connecting households, communities and
               institutions with verified skilled workers matched by service, location,
               availability and workload.
@@ -213,18 +219,14 @@ export function CustomerHomePage() {
             <Link className="primary-action" to="/booking">
               <TextRoll splitBy="words">Request a service</TextRoll> <ArrowRight size={18} />
             </Link>
-            <Link className="secondary-action" to="/worker">
+            <Link className="secondary-action" to="/worker" style={{ backgroundColor: 'rgba(255,255,255,0.1)', color: 'white', borderColor: 'rgba(255,255,255,0.3)' }}>
               <TextRoll splitBy="words">Join as a worker</TextRoll> <ArrowRight size={18} />
             </Link>
           </div>
         </div>
 
-        <div className="network-board" aria-label="Cooperative service hub illustration">
-          <img
-            alt="Architectural illustration of a cooperative service hub"
-            className="hero-building"
-            src="/images/hero-image.png"
-          />
+        <div className="network-board" style={{ position: 'relative', zIndex: 1 }}>
+          {/* Empty right side to balance the grid, letting the background shine through */}
         </div>
       </section>
 
@@ -440,8 +442,8 @@ export function CustomerHomePage() {
             </div>
           ))}
         </div>
-        <strong className="footer-word" aria-label="SAHAAY">
-          {'SAHAAY'.split('').map((letter, index) => (
+        <strong className="footer-word" aria-label="SAHKAAR" style={{ fontSize: 'clamp(2.5rem, 10vw, 7rem)', letterSpacing: '-0.02em', maxWidth: '100%', overflow: 'hidden' }}>
+          {'SAHKAAR'.split('').map((letter, index) => (
             <span data-letter={letter} key={`${letter}-${index}`}>{letter}</span>
           ))}
         </strong>
