@@ -9,6 +9,7 @@ import { LoginPage } from '../features/auth/pages/LoginPage';
 import { SignupPage } from '../features/auth/pages/SignupPage';
 import { CustomerSignupPage } from '../features/auth/pages/CustomerSignupPage';
 import { WorkerSignupPage } from '../features/auth/pages/WorkerSignupPage';
+import { AdminSignupPage } from '../features/auth/pages/AdminSignupPage';
 import { ProtectedRoute } from '../features/auth/components/ProtectedRoute';
 import { GuestRoute } from '../features/auth/components/GuestRoute';
 
@@ -22,6 +23,7 @@ export const routes = createBrowserRouter([
       { path: 'signup', element: <GuestRoute><SignupPage /></GuestRoute> },
       { path: 'signup/customer', element: <GuestRoute><CustomerSignupPage /></GuestRoute> },
       { path: 'signup/worker', element: <GuestRoute><WorkerSignupPage /></GuestRoute> },
+      { path: 'signup/admin', element: <GuestRoute><AdminSignupPage /></GuestRoute> },
       { path: 'customer', element: <GuestRoute><CustomerHomePage /></GuestRoute> },
       {
         path: 'worker',

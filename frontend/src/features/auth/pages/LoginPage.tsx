@@ -105,27 +105,30 @@ export function LoginPage() {
             <div className="auth-quick-demo-box">
               <span className="mono-label">// INSTANT DEMO EVALUATION</span>
               <p className="demo-hint">Skip manual input and test live post-login screens immediately:</p>
-              <div className="demo-actions">
+              <div className="demo-actions" style={{ display: 'flex', flexDirection: 'row', gap: '6px', flexWrap: 'nowrap' }}>
                 <button
                   type="button"
                   className={`demo-btn ${selectedRole === 'customer' ? 'active-demo' : ''}`}
                   onClick={() => handleDemoLogin('customer')}
+                  style={{ flex: 1, minWidth: 0, fontSize: '0.7rem', padding: '8px 4px', textAlign: 'center' }}
                 >
-                  ⚡ LOGIN AS DEMO CUSTOMER
+                  ⚡ CUSTOMER
                 </button>
                 <button
                   type="button"
                   className={`demo-btn ${selectedRole === 'worker' ? 'active-demo' : ''}`}
                   onClick={() => handleDemoLogin('worker')}
+                  style={{ flex: 1, minWidth: 0, fontSize: '0.7rem', padding: '8px 4px', textAlign: 'center' }}
                 >
-                  🛠️ LOGIN AS DEMO WORKER
+                  🛠️ WORKER
                 </button>
                 <button
                   type="button"
                   className={`demo-btn ${selectedRole === 'admin' ? 'active-demo' : ''}`}
                   onClick={() => handleDemoLogin('admin')}
+                  style={{ flex: 1, minWidth: 0, fontSize: '0.7rem', padding: '8px 4px', textAlign: 'center' }}
                 >
-                  🛡️ LOGIN AS DEMO ADMIN
+                  🛡️ ADMIN
                 </button>
               </div>
             </div>
@@ -138,13 +141,14 @@ export function LoginPage() {
             {/* Role Switcher Tabs */}
             <div className="role-switcher-header">
               <span className="mono-label">// SELECT USER FLOW</span>
-              <div className="role-tab-group" role="tablist">
+              <div className="role-tab-group" role="tablist" style={{ display: 'flex', flexDirection: 'row', gap: '8px', flexWrap: 'nowrap' }}>
                 <button
                   type="button"
                   role="tab"
                   aria-selected={selectedRole === 'customer'}
                   className={`role-tab ${selectedRole === 'customer' ? 'active-customer' : ''}`}
                   onClick={() => handleRoleSelect('customer')}
+                  style={{ flex: 1, minWidth: 0, padding: '8px 4px', fontSize: '0.75rem' }}
                 >
                   CUSTOMER
                 </button>
@@ -154,6 +158,7 @@ export function LoginPage() {
                   aria-selected={selectedRole === 'worker'}
                   className={`role-tab ${selectedRole === 'worker' ? 'active-worker' : ''}`}
                   onClick={() => handleRoleSelect('worker')}
+                  style={{ flex: 1, minWidth: 0, padding: '8px 4px', fontSize: '0.75rem' }}
                 >
                   WORKER
                 </button>
@@ -163,6 +168,7 @@ export function LoginPage() {
                   aria-selected={selectedRole === 'admin'}
                   className={`role-tab ${selectedRole === 'admin' ? 'active-admin' : ''}`}
                   onClick={() => handleRoleSelect('admin')}
+                  style={{ flex: 1, minWidth: 0, padding: '8px 4px', fontSize: '0.75rem' }}
                 >
                   ADMIN
                 </button>

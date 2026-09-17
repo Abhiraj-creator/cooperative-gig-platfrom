@@ -6,6 +6,10 @@ interface WorkerProfile {
   name: string;
   location: string;
   isApproved: boolean;
+  skills?: string[];
+  rate?: number;
+  phone?: string;
+  photo?: string;
 }
 
 interface AdminState {

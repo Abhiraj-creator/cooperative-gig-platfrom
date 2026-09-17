@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAppDispatch } from '../../../app/hooks';
 import { loginSuccess } from '../state/authSlice';
-import { authService } from '../services/authService';
 
-export function CustomerSignupPage() {
+export function AdminSignupPage() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -12,7 +11,7 @@ export function CustomerSignupPage() {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
-  const [location, setLocation] = useState('');
+  const [adminCode, setAdminCode] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -20,17 +19,18 @@ export function CustomerSignupPage() {
     setIsLoading(true);
 
     try {
-      const user = await authService.signupCustomer({
+      // Mock admin signup — in production, verify the admin code server-side
+      const newAdmin = {
+        id: `admin-${Date.now()}`,
         name,
         email,
-        password,
-        location,
-      });
+        role: 'admin' as const,
+      };
 
-      dispatch(loginSuccess(user));
-      navigate('/booking');
+      dispatch(loginSuccess(newAdmin));
+      navigate('/admin');
     } catch (err) {
-      console.error('Customer signup error', err);
+      console.error('Admin signup error', err);
     } finally {
       setIsLoading(false);
     }
@@ -43,48 +43,48 @@ export function CustomerSignupPage() {
           <Link to="/signup" className="back-link">
             ← Back to Role Selection
           </Link>
-          <span className="eyebrow">// SERVICE SEEKER REGISTRATION</span>
-          <h1>CREATE CUSTOMER ACCOUNT</h1>
-          <p>Get instant access to verified worker-owned services with transparent pricing.</p>
+          <span className="eyebrow">// FEDERATION ADMINISTRATOR REGISTRATION</span>
+          <h1>CREATE ADMIN ACCOUNT</h1>
+          <p>Register as a federation admin to govern, verify, and oversee the cooperative network.</p>
         </div>
 
         <form onSubmit={handleSubmit} className="auth-form-box">
           <div className="form-group">
-            <label htmlFor="cust-name" className="mono-label">
+            <label htmlFor="adm-name" className="mono-label">
               FULL NAME
             </label>
             <input
-              id="cust-name"
+              id="adm-name"
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="e.g. Rahul Sharma"
+              placeholder="e.g. Priya Verma"
               className="tech-input"
               required
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="cust-email" className="mono-label">
+            <label htmlFor="adm-email" className="mono-label">
               EMAIL ADDRESS
             </label>
             <input
-              id="cust-email"
+              id="adm-email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="rahul@example.com"
+              placeholder="admin@coopgig.org"
               className="tech-input"
               required
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="cust-phone" className="mono-label">
+            <label htmlFor="adm-phone" className="mono-label">
               PHONE NUMBER
             </label>
             <input
-              id="cust-phone"
+              id="adm-phone"
               type="tel"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
@@ -95,11 +95,29 @@ export function CustomerSignupPage() {
           </div>
 
           <div className="form-group">
-            <label htmlFor="cust-password" className="mono-label">
+            <label htmlFor="adm-code" className="mono-label">
+              FEDERATION ACCESS CODE
+            </label>
+            <input
+              id="adm-code"
+              type="text"
+              value={adminCode}
+              onChange={(e) => setAdminCode(e.target.value)}
+              placeholder="e.g. SAHKAAR-ADMIN-2026"
+              className="tech-input"
+              required
+            />
+            <small style={{ color: 'var(--text-muted)', marginTop: '4px', display: 'block' }}>
+              Access code is issued by the cooperative federation.
+            </small>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="adm-password" className="mono-label">
               CREATE PASSWORD
             </label>
             <input
-              id="cust-password"
+              id="adm-password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -109,23 +127,8 @@ export function CustomerSignupPage() {
             />
           </div>
 
-          <div className="form-group">
-            <label htmlFor="cust-location" className="mono-label">
-              PRIMARY SERVICE LOCATION
-            </label>
-            <input
-              id="cust-location"
-              type="text"
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-              placeholder="Enter full service address"
-              className="tech-input"
-              required
-            />
-          </div>
-
           <button type="submit" className="auth-submit-btn" disabled={isLoading}>
-            {isLoading ? 'REGISTERING ACCOUNT...' : 'COMPLETE CUSTOMER REGISTRATION →'}
+            {isLoading ? 'REGISTERING ADMIN...' : 'CREATE ADMIN ACCOUNT →'}
           </button>
         </form>
 

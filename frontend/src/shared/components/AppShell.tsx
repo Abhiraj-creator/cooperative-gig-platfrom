@@ -136,12 +136,12 @@ export function AppShell({ children }: AppShellProps) {
           isScrolled ? 'header-scrolled' : ''
         }`}
       >
-        <Link className="brand-mark" to="/" aria-label="SAHAAY home">
+        <Link className="brand-mark" to="/" aria-label="SAHKAAR home">
           <span className="brand-icon" aria-hidden="true">
             <Blocks size={24} strokeWidth={1.7} />
           </span>
           <span>
-            <strong>SAHAAY</strong>
+            <strong>SAHKAAR</strong>
             <small>Cooperative Services Network</small>
           </span>
         </Link>

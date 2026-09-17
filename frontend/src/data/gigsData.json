@@ -5,7 +5,11 @@
     { "id": "cat-3", "name": "AC & Appliance Repair", "icon": "❄️", "count": 6 },
     { "id": "cat-4", "name": "Cleaning Services", "icon": "🧹", "count": 9 },
     { "id": "cat-5", "name": "Carpentry", "icon": "🪚", "count": 7 },
-    { "id": "cat-6", "name": "Painting & Decor", "icon": "🎨", "count": 11 }
+    { "id": "cat-6", "name": "Painting & Decor", "icon": "🎨", "count": 11 },
+    { "id": "cat-7", "name": "Solar Installation", "icon": "☀️", "count": 4 },
+    { "id": "cat-8", "name": "Smart Home Setup", "icon": "🏠", "count": 5 },
+    { "id": "cat-9", "name": "Automotive Repair", "icon": "🚗", "count": 3 },
+    { "id": "cat-10", "name": "Pest Control", "icon": "🐛", "count": 8 }
   ],
   "gigs": [
     {
