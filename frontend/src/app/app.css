@@ -3986,6 +3986,60 @@ html.lenis body {
   border-color: #171717 !important;
 }
 
+/* 6. Logo Icon Container Clean Polish (No boxes/borders around logo) */
+.brand-icon,
+.customer-brand-icon,
+.worker-brand-icon {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* 7. Signup Page: Customer, Worker & Admin in a SINGLE horizontal line */
+.signup-hub-container {
+  max-width: 1280px !important;
+}
+
+.signup-role-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 24px !important;
+}
+
+@media (max-width: 960px) {
+  .signup-role-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* 8. Category filter custom input polish */
+.custom-category-inline-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  border: 1px solid var(--accent);
+  padding: 6px 12px;
+  margin-left: 8px;
+  border-radius: 4px;
+}
+
+.custom-category-inline-input input {
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--foreground);
+  min-width: 160px;
+}
+
+
 
 
 

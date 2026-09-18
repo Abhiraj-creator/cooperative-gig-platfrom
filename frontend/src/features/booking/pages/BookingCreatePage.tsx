@@ -50,6 +50,8 @@ export function BookingCreatePage() {
   const [customTitle, setCustomTitle] = useState('');
   const [customDescription, setCustomDescription] = useState('');
   const [customCategory, setCustomCategory] = useState(gigsData.categories[0].id);
+  const [customCategoryModalInput, setCustomCategoryModalInput] = useState('');
+  const [customFilterCategoryInput, setCustomFilterCategoryInput] = useState('');
   const [customUrgency, setCustomUrgency] = useState('Normal');
   const [customHours, setCustomHours] = useState(1);
   const [customLocation, setCustomLocation] = useState('');
@@ -71,7 +73,20 @@ export function BookingCreatePage() {
       gig.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       gig.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
       gig.category.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory = selectedCategory === 'all' || gig.categoryId === selectedCategory;
+    
+    let matchesCategory = false;
+    if (selectedCategory === 'all') {
+      matchesCategory = true;
+    } else if (selectedCategory === 'others') {
+      if (customFilterCategoryInput.trim()) {
+        matchesCategory = gig.category.toLowerCase().includes(customFilterCategoryInput.trim().toLowerCase());
+      } else {
+        matchesCategory = true;
+      }
+    } else {
+      matchesCategory = gig.categoryId === selectedCategory;
+    }
+
     return matchesSearch && matchesCategory;
   });
 
@@ -87,11 +102,16 @@ export function BookingCreatePage() {
 
   const handleCustomRequestSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const finalCategoryName =
+      customCategory === 'others'
+        ? customCategoryModalInput.trim() || 'Custom Service'
+        : gigsData.categories.find((c) => c.id === customCategory)?.name || 'Custom';
+
     const newGig: GigItem = {
       id: `gig-custom-${Date.now()}`,
       title: customTitle || 'Custom Service Request',
       description: customDescription || 'No details provided.',
-      category: gigsData.categories.find(c => c.id === customCategory)?.name || 'Custom',
+      category: finalCategoryName,
       categoryId: customCategory,
       price: calculatedPrice,
       estimatedHours: customHours,
@@ -315,6 +335,34 @@ export function BookingCreatePage() {
                   <span>{cat.icon}</span> {cat.name}
                 </button>
               ))}
+              <button
+                type="button"
+                className={`filter-chip ${selectedCategory === 'others' ? 'active-chip' : ''}`}
+                onClick={() => setSelectedCategory('others')}
+              >
+                <span>✨</span> Others
+              </button>
+
+              {selectedCategory === 'others' && (
+                <div className="custom-category-inline-input">
+                  <input
+                    type="text"
+                    placeholder="Enter custom category..."
+                    value={customFilterCategoryInput}
+                    onChange={(e) => setCustomFilterCategoryInput(e.target.value)}
+                    autoFocus
+                  />
+                  {customFilterCategoryInput && (
+                    <button
+                      type="button"
+                      style={{ background: 'none', border: 'none', cursor: 'pointer', opacity: 0.7 }}
+                      onClick={() => setCustomFilterCategoryInput('')}
+                    >
+                      ×
+                    </button>
+                  )}
+                </div>
+              )}
             </div>
           </section>
 
@@ -562,8 +610,23 @@ export function BookingCreatePage() {
                       onChange={(e) => setCustomCategory(e.target.value)}
                     >
                       {gigsData.categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+                      <option value="others">✨ Others (Custom Category)</option>
                     </select>
                   </div>
+
+                  {customCategory === 'others' && (
+                    <div className="form-group">
+                      <label className="mono-label">SPECIFY CUSTOM CATEGORY</label>
+                      <input
+                        type="text"
+                        className="tech-input"
+                        placeholder="e.g. Pet Care, Gardening, Solar Repair"
+                        value={customCategoryModalInput}
+                        onChange={(e) => setCustomCategoryModalInput(e.target.value)}
+                        required
+                      />
+                    </div>
+                  )}
 
                   <div className="form-group">
                     <label className="mono-label">DETAILED DESCRIPTION</label>
