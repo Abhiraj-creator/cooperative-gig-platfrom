@@ -211,28 +211,28 @@ export function AppShell({ children }: AppShellProps) {
               </Link>
             </>
           )}
-
-          {/* Mobile hamburger for public nav */}
-          <button
-            type="button"
-            className={`mobile-menu-btn public-mobile-btn ${mobileOpen ? 'menu-open' : ''}`}
-            onClick={() => setMobileOpen((prev) => !prev)}
-            aria-label="Toggle menu"
-            aria-expanded={mobileOpen}
-          >
-            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
         </nav>
+
+        {/* Mobile hamburger for public nav */}
+        <button
+          type="button"
+          className={`mobile-menu-btn public-mobile-btn ${mobileOpen ? 'menu-open' : ''}`}
+          onClick={() => setMobileOpen((prev) => !prev)}
+          aria-label="Toggle menu"
+          aria-expanded={mobileOpen}
+        >
+          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+        </button>
       </header>
 
-      {/* Public Mobile Menu */}
+      {/* Public Mobile Menu — outside header so overflow:hidden on header doesn't clip it */}
       {mobileOpen && (
         <div className="public-mobile-menu">
-          <a href="/#network" className="mobile-nav-link">How it works</a>
-          <a href="/#services" className="mobile-nav-link">Services</a>
-          <Link to="/signup/worker" className="mobile-nav-link">Join as Worker</Link>
-          <Link to="/login" className="mobile-nav-link">Sign In</Link>
-          <Link to="/signup" className="mobile-nav-cta">Join / Register →</Link>
+          <a href="/#network" className="mobile-nav-link" onClick={() => setMobileOpen(false)}>How it works</a>
+          <a href="/#services" className="mobile-nav-link" onClick={() => setMobileOpen(false)}>Services</a>
+          <Link to="/signup/worker" className="mobile-nav-link" onClick={() => setMobileOpen(false)}>Join as Worker</Link>
+          <Link to="/login" className="mobile-nav-link" onClick={() => setMobileOpen(false)}>Sign In</Link>
+          <Link to="/signup" className="mobile-nav-cta" onClick={() => setMobileOpen(false)}>Join / Register →</Link>
         </div>
       )}
 
