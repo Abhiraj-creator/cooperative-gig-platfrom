@@ -6,20 +6,22 @@ interface LogoProps {
   style?: React.CSSProperties;
 }
 
-export function Logo({ size = 36, className = '', style }: LogoProps) {
+export function Logo({ size = 60, className = '', style }: LogoProps) {
   return (
     <img
-      src="/images/logo.png"
+      src="/images/one.png"
       alt="Sahkaar logo"
-      width={size}
-      height={size}
+      width='79'
+      height='79'
       className={`sahkaar-logo ${className}`}
       style={{
         display: 'inline-block',
         verticalAlign: 'middle',
         flexShrink: 0,
-        objectFit: 'contain',
+        objectFit: 'cover',
         borderRadius: '6px',
+        backgroundColor:'#F3F2ED',
+        paddingBottom:'1px',
         ...style,
       }}
     />
