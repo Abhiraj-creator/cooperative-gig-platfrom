@@ -4039,6 +4039,394 @@ html.lenis body {
   min-width: 160px;
 }
 
+/* ==========================================================================
+   STRICT MOBILE RESPONSIVENESS OVERRIDES (@media (max-width: 768px))
+   No desktop changes — mobile only!
+   ========================================================================== */
+@media (max-width: 768px) {
+
+  /* 1. Global Viewport & Containers Protection */
+  html, body {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+  }
+
+  .app-shell, .page, main {
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 2. Public Landing Page Header & Navigation (AppShell) */
+  .site-header {
+    height: auto !important;
+    min-height: 64px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 8px 16px !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 10000 !important;
+    background: var(--background) !important;
+  }
+
+  .brand-mark {
+    border-right: none !important;
+    padding: 4px 0 !important;
+    height: auto !important;
+    gap: 8px !important;
+  }
+
+  .brand-mark strong {
+    font-size: 1.15rem !important;
+  }
+
+  .brand-mark small {
+    display: none !important;
+  }
+
+  /* Hide Desktop links inside .app-nav on mobile */
+  .app-nav .nav-menu,
+  .app-nav .nav-link,
+  .app-nav .nav-cta {
+    display: none !important;
+  }
+
+  /* Public Mobile Menu Button (Hamburger) */
+  .public-mobile-btn {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 42px !important;
+    height: 42px !important;
+    background: var(--surface) !important;
+    border: 1px solid var(--border) !important;
+    color: var(--foreground) !important;
+    cursor: pointer !important;
+    border-radius: 4px !important;
+  }
+
+  /* Public Mobile Menu Dropdown Overlay */
+  .public-mobile-menu {
+    position: fixed !important;
+    top: 64px !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    background: var(--background) !important;
+    border-bottom: 2px solid var(--accent) !important;
+    padding: 20px 24px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 14px !important;
+    z-index: 10001 !important;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2) !important;
+    max-height: calc(100vh - 64px) !important;
+    overflow-y: auto !important;
+  }
+
+  .public-mobile-menu .mobile-nav-link {
+    font-family: var(--font-mono) !important;
+    font-size: 0.9rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    padding: 10px 0 !important;
+    border-bottom: 1px solid var(--border) !important;
+    color: var(--foreground) !important;
+    display: block !important;
+  }
+
+  .public-mobile-menu .mobile-nav-cta {
+    background: var(--accent) !important;
+    color: #fffaf4 !important;
+    font-family: var(--font-mono) !important;
+    font-size: 0.85rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    padding: 14px !important;
+    text-align: center !important;
+    margin-top: 6px !important;
+    border-radius: 4px !important;
+    display: block !important;
+  }
+
+  /* 3. Customer & Worker Navbars on Mobile */
+  .customer-navbar,
+  .worker-navbar {
+    height: auto !important;
+    min-height: 64px !important;
+    padding: 8px 16px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 10000 !important;
+    background: var(--background) !important;
+  }
+
+  .customer-brand-text small,
+  .worker-brand-text small {
+    display: none !important;
+  }
+
+  .customer-nav-links,
+  .worker-nav-links,
+  .customer-avatar-name,
+  .worker-avatar-name,
+  .worker-coop-badge {
+    display: none !important;
+  }
+
+  .mobile-menu-btn {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 40px !important;
+    height: 40px !important;
+    gap: 5px !important;
+    background: var(--surface) !important;
+    border: 1px solid var(--border) !important;
+    cursor: pointer !important;
+  }
+
+  .mobile-menu-btn span {
+    display: block !important;
+    width: 20px !important;
+    height: 2px !important;
+    background: var(--foreground) !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .customer-mobile-menu,
+  .worker-mobile-menu {
+    position: fixed !important;
+    top: 64px !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    background: var(--background) !important;
+    border-bottom: 2px solid var(--accent) !important;
+    padding: 20px 24px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    z-index: 10001 !important;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2) !important;
+    max-height: calc(100vh - 64px) !important;
+    overflow-y: auto !important;
+  }
+
+  .customer-mobile-menu .mobile-nav-link,
+  .worker-mobile-menu .mobile-nav-link {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    padding: 12px 0 !important;
+    border-bottom: 1px solid var(--border) !important;
+    font-family: var(--font-mono) !important;
+    font-size: 0.85rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+  }
+
+  .mobile-nav-logout {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    padding: 14px !important;
+    background: var(--accent) !important;
+    color: #fffaf4 !important;
+    border: none !important;
+    font-family: var(--font-mono) !important;
+    font-weight: 700 !important;
+    justify-content: center !important;
+    margin-top: 8px !important;
+    cursor: pointer !important;
+  }
+
+  /* 4. Landing Page Hero & Grids on Mobile */
+  .hero-section {
+    grid-template-columns: 1fr !important;
+    min-height: auto !important;
+  }
+
+  .hero-copy {
+    padding: 2rem 1.25rem !important;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(2.5rem, 10vw, 4rem) !important;
+  }
+
+  .hero-actions {
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+
+  .hero-actions a {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  .split-section {
+    grid-template-columns: 1fr !important;
+    padding: 2rem 1.25rem !important;
+    gap: 20px !important;
+  }
+
+  .problem-grid,
+  .service-grid,
+  .journey-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* 5. Matching Engine Grid (Screenshot 1 Fix) */
+  .matching-header {
+    grid-template-columns: 1fr !important;
+  }
+
+  .matching-illustration {
+    display: none !important;
+  }
+
+  .matching-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+    margin-top: 20px !important;
+  }
+
+  .request-panel,
+  .engine-panel,
+  .match-result {
+    min-height: auto !important;
+    width: 100% !important;
+    padding: 20px !important;
+    box-sizing: border-box !important;
+  }
+
+  .engine-panel div {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 8px 0 !important;
+    border-bottom: 1px solid var(--border) !important;
+  }
+
+  /* 6. Worker Dashboard Responsiveness (Screenshot 2 Fix) */
+  .worker-hero-header {
+    padding: 20px 16px !important;
+  }
+
+  .worker-profile-summary {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+  }
+
+  .worker-name {
+    font-size: 1.5rem !important;
+    flex-wrap: wrap !important;
+  }
+
+  .worker-badges {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+
+  .worker-stats-grid {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .stat-card {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 18px !important;
+  }
+
+  .dispatch-control-bar {
+    padding: 12px 16px !important;
+    overflow-x: auto !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .tab-buttons {
+    display: flex !important;
+    overflow-x: auto !important;
+    white-space: nowrap !important;
+    gap: 8px !important;
+    width: 100% !important;
+    padding-bottom: 6px !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .tab-btn {
+    flex-shrink: 0 !important;
+    font-size: 0.7rem !important;
+    padding: 8px 12px !important;
+  }
+
+  .dispatch-list-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .dispatch-card {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 18px !important;
+  }
+
+  .dispatch-card-footer {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+  }
+
+  .card-actions {
+    width: 100% !important;
+  }
+
+  .action-btn {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  /* 7. Admin Dashboard Responsiveness (Screenshot 3 Fix) */
+  .worker-approval-list {
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .booking-status-card {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 16px !important;
+  }
+
+  .booking-status-card > div:first-child {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+
+  .booking-card-top {
+    align-self: flex-start !important;
+  }
+
+  .admin-grid,
+  .queue-card-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+
 
 
 

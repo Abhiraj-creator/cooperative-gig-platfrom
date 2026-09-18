@@ -27,8 +27,8 @@ export function WorkerApprovalList() {
         {workers.map((worker) => (
           <div key={worker.id} className="booking-status-card" style={{ display: 'flex', flexDirection: 'column', gap: '16px', padding: '24px', backgroundColor: 'var(--surface)', borderRadius: '12px', border: '1px solid var(--border)' }}>
             
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-              <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '12px' }}>
+              <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
                 <img 
                   src={worker.photo || `https://ui-avatars.com/api/?name=${encodeURIComponent(worker.name)}&background=random&size=128`} 
                   alt={worker.name} 
@@ -36,7 +36,7 @@ export function WorkerApprovalList() {
                 />
                 <div>
                   <h4 style={{ margin: '0 0 4px 0', fontSize: '1.2rem', color: 'var(--text)' }}>{worker.name}</h4>
-                  <p style={{ margin: 0, color: 'var(--text-muted)', fontSize: '0.9rem', display: 'flex', gap: '8px', alignItems: 'center' }}>
+                  <p style={{ margin: 0, color: 'var(--text-muted)', fontSize: '0.9rem', display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
                     <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>📍 {worker.location}</span>
                     <span>|</span>
                     <span style={{ fontFamily: 'monospace' }}>ID: {worker.id}</span>
