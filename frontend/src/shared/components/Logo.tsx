@@ -5,7 +5,7 @@ interface LogoProps extends React.SVGProps<SVGSVGElement> {
 }
 
 export function Logo({ size = 36, className = '', style, ...props }: LogoProps) {
-  const maskId = React.useId ? React.useId() : 'sahkaar-logo-mask';
+  const maskId = React.useId ? `mask-${React.useId().replace(/[^a-zA-Z0-9_-]/g, '')}` : 'sahkaar-logo-mask';
 
   return (
     <svg
@@ -20,26 +20,26 @@ export function Logo({ size = 36, className = '', style, ...props }: LogoProps) 
         verticalAlign: 'middle',
         flexShrink: 0,
         shapeRendering: 'geometricPrecision',
+        overflow: 'visible',
         ...style,
       }}
       {...props}
     >
       <defs>
-        <mask id={maskId}>
-          {/* White areas remain visible, black lines create transparent cutouts */}
-          <rect x="0" y="0" width="200" height="200" fill="white" />
+        <mask id={maskId} maskUnits="userSpaceOnUse" x="0" y="0" width="200" height="200">
+          <rect x="-10" y="-10" width="220" height="20" fill="white" />
           {/* Top Hand Finger Slits */}
           <path
             d="M 120 23 C 145 25, 166 35, 177 50"
             stroke="black"
-            strokeWidth="5"
+            strokeWidth="4.5"
             fill="none"
             strokeLinecap="round"
           />
           <path
             d="M 105 17 C 135 18, 160 28, 173 42"
             stroke="black"
-            strokeWidth="5"
+            strokeWidth="4.5"
             fill="none"
             strokeLinecap="round"
           />
@@ -47,23 +47,23 @@ export function Logo({ size = 36, className = '', style, ...props }: LogoProps) 
           <path
             d="M 80 177 C 55 175, 34 165, 23 150"
             stroke="black"
-            strokeWidth="5"
+            strokeWidth="4.5"
             fill="none"
             strokeLinecap="round"
           />
           <path
             d="M 95 183 C 65 182, 40 172, 27 158"
             stroke="black"
-            strokeWidth="5"
+            strokeWidth="4.5"
             fill="none"
             strokeLinecap="round"
           />
         </mask>
       </defs>
 
-      <g mask={`url(#${maskId})`}>
-        {/* Center People Silhouettes */}
-        {/* Center Person (Tall) */}
+      {/* Center People Silhouettes - Drawn outside mask so they are NEVER cut */}
+      <g className="logo-center-people">
+        {/* Center Person (Tallest) */}
         <circle cx="100" cy="74" r="14" />
         <path d="M 82 116 C 82 94, 118 94, 118 116 Z" />
 
@@ -74,8 +74,11 @@ export function Logo({ size = 36, className = '', style, ...props }: LogoProps) 
         {/* Right Person */}
         <circle cx="133" cy="85" r="10.5" />
         <path d="M 119 116 C 119 99, 147 99, 147 116 Z" />
+      </g>
 
-        {/* Top Hand / Swoop (Upper part of S) */}
+      {/* Top & Bottom Cooperative Hands (Masked for finger slits) */}
+      <g mask={`url(#${maskId})`} className="logo-coop-hands">
+        {/* Top Hand / Swoop */}
         <path d="M 182 42 
                  C 155 14, 105 10, 65 22 
                  C 25 34, 10 68, 20 104 
@@ -85,7 +88,7 @@ export function Logo({ size = 36, className = '', style, ...props }: LogoProps) 
                  C 138 36, 168 54, 178 80 
                  C 183 68, 184 54, 182 42 Z" />
 
-        {/* Bottom Hand / Swoop (Lower part of S) */}
+        {/* Bottom Hand / Swoop */}
         <path d="M 18 158 
                  C 45 186, 95 190, 135 178 
                  C 175 166, 190 132, 180 96 
@@ -98,3 +101,4 @@ export function Logo({ size = 36, className = '', style, ...props }: LogoProps) 
     </svg>
   );
 }
+
