@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Blocks, LogOut, Settings, LayoutDashboard, ListChecks, Briefcase, IndianRupee, ChevronDown, Shield } from 'lucide-react';
+import { LogOut, Settings, LayoutDashboard, ListChecks, Briefcase, IndianRupee, ChevronDown, Shield } from 'lucide-react';
+import { Logo } from './Logo';
 import { useAuth } from '../../features/auth/hooks/useAuth';
 import { useAppDispatch } from '../../app/hooks';
 import { logout } from '../../features/auth/state/authSlice';
@@ -48,12 +49,12 @@ export function WorkerNavbar() {
   return (
     <header className="worker-navbar" role="banner">
       {/* Brand */}
-      <Link to="/worker" className="worker-brand" aria-label="SAHAAY Worker Portal">
+      <Link to="/worker" className="worker-brand" aria-label="SAHKAAR Worker Portal">
         <span className="worker-brand-icon" aria-hidden="true">
-          <Blocks size={22} strokeWidth={1.7} />
+          <Logo size={24} />
         </span>
         <span className="worker-brand-text">
-          <strong>SAHAAY</strong>
+          <strong>SAHKAAR</strong>
           <small>Co-op Worker Portal</small>
         </span>
       </Link>

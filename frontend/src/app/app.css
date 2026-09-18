@@ -3909,5 +3909,86 @@ html.lenis body {
   gap: 12px;
 }
 
+/* ==========================================================================
+   CUSTOM POLISH & OVERRIDES FOR SAHKAAR
+   ========================================================================== */
+
+/* 2. Hide wireframe/grid lines with before/after pseudo-elements on homepage */
+.network-board::before,
+.network-board::after {
+  display: none !important;
+}
+
+/* 3. TextRoll clipping guarantees (prevent double text visibility) */
+.text-roll-wrapper {
+  position: relative !important;
+  display: inline-block !important;
+  overflow: hidden !important;
+  vertical-align: middle !important;
+  white-space: nowrap !important;
+}
+
+.text-roll-original {
+  display: block !important;
+  white-space: nowrap !important;
+}
+
+.text-roll-clone {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  pointer-events: none !important;
+  white-space: nowrap !important;
+}
+
+/* 4. Footer SAHKAAR center alignment & font size */
+.site-footer {
+  text-align: center;
+}
+
+.footer-word {
+  display: flex !important;
+  justify-content: center !important;
+  text-align: center !important;
+  font-size: clamp(3.5rem, 14vw, 10.5rem) !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+}
+
+/* 5. Login Page Role Switcher Tabs & Admin Background */
+.role-tab {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--foreground);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: all 200ms ease;
+  text-transform: uppercase;
+}
+
+.role-tab.active-customer {
+  background: var(--foreground) !important;
+  color: var(--background) !important;
+  border-color: var(--foreground) !important;
+}
+
+.role-tab.active-worker {
+  background: var(--accent) !important;
+  color: #fffaf4 !important;
+  border-color: var(--accent) !important;
+}
+
+.role-tab.active-admin {
+  background: #171717 !important;
+  color: #ffffff !important;
+  border-color: #171717 !important;
+}
+
+
 
 

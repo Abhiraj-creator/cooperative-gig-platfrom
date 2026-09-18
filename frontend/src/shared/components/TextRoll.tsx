@@ -87,7 +87,7 @@ const TextRoll = ({
     if (!wrapper) return;
 
     const parentInteractive = wrapper.closest<HTMLElement>(
-      'a, button, [role="button"], .nav-link, .nav-cta, .nav-menu, .secondary-action, .primary-action'
+      'a, button, [role="button"], .nav-link, .nav-cta, .nav-menu, .secondary-action, .primary-action, .final-cta a, .service-tile a'
     ) || wrapper;
 
     const onEnter = () => handleHover(true);
@@ -105,15 +105,33 @@ const TextRoll = ({
   return (
     <div
       ref={WrapperRef}
-      className={`overflow-hidden relative inline-block whitespace-nowrap align-middle ${className}`}
+      className={`text-roll-wrapper overflow-hidden relative inline-block whitespace-nowrap align-middle ${className}`}
+      style={{
+        position: 'relative',
+        display: 'inline-block',
+        overflow: 'hidden',
+        verticalAlign: 'middle',
+        whiteSpace: 'nowrap',
+      }}
     >
       {/* Original — visible at rest, rolls out on hover */}
-      <div className="text-roll-original whitespace-nowrap">{children}</div>
+      <div className="text-roll-original whitespace-nowrap" style={{ display: 'block', whiteSpace: 'nowrap' }}>
+        {children}
+      </div>
 
       {/* Clone — hidden below at rest, rolls in on hover */}
       <div
         className="text-roll-clone absolute top-0 left-0 w-full h-full pointer-events-none whitespace-nowrap"
         aria-hidden="true"
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          pointerEvents: 'none',
+          whiteSpace: 'nowrap',
+        }}
       >
         {children}
       </div>

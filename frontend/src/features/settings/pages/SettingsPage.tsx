@@ -15,7 +15,7 @@ interface NotificationSettings {
   promotions: boolean;
 }
 
-const SETTINGS_STORAGE_KEY = 'sahaay_settings';
+const SETTINGS_STORAGE_KEY = 'sahkaar_settings';
 
 export function SettingsPage() {
   const { user } = useAuth();
