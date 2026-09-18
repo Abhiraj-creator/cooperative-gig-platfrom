@@ -61,7 +61,7 @@ export function SignupPage() {
               <li>✓ Platform analytics & treasury oversight</li>
               <li>✓ Dispute resolution & audit trail access</li>
             </ul>
-            <button type="button" className="card-action-btn" style={{ borderColor: 'var(--accent)', color: 'var(--accent)' }}>
+            <button type="button" className="card-action-btn" style={{ borderColor: 'none', color: 'white' }}>
               REGISTER AS ADMIN →
             </button>
           </div>
