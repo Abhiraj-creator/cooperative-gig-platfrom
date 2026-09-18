@@ -6,13 +6,13 @@ interface LogoProps {
   style?: React.CSSProperties;
 }
 
-export function Logo({ size = 60, className = '', style }: LogoProps) {
+export function Logo({ size = 79, className = '', style }: LogoProps) {
   return (
     <img
       src="/images/one.png"
       alt="Sahkaar logo"
-      width='79'
-      height='79'
+      width={size}
+      height={size}
       className={`sahkaar-logo ${className}`}
       style={{
         display: 'inline-block',
