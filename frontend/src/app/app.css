@@ -115,7 +115,7 @@ button {
   border-right: 1px solid var(--border);
   gap: 14px;
   height: 100%;
-  padding: 16px 28px;
+  padding: 10px 28px;
   box-sizing: border-box;
 }
 
