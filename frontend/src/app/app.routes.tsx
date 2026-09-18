@@ -12,11 +12,13 @@ import { WorkerSignupPage } from '../features/auth/pages/WorkerSignupPage';
 import { AdminSignupPage } from '../features/auth/pages/AdminSignupPage';
 import { ProtectedRoute } from '../features/auth/components/ProtectedRoute';
 import { GuestRoute } from '../features/auth/components/GuestRoute';
+import { NotFoundPage } from '../shared/pages/NotFoundPage';
 
 export const routes = createBrowserRouter([
   {
     path: '/',
     element: <App />,
+    errorElement: <NotFoundPage />,
     children: [
       { index: true, element: <GuestRoute><CustomerHomePage /></GuestRoute> },
       { path: 'login', element: <GuestRoute><LoginPage /></GuestRoute> },
@@ -57,7 +59,12 @@ export const routes = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+      {
+        path: '*',
+        element: <NotFoundPage />,
+      },
     ],
   },
 ]);
+
 
