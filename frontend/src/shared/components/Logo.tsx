@@ -1,18 +1,17 @@
 import React from 'react';
 
 interface LogoProps {
-  size?: number | string;
   className?: string;
   style?: React.CSSProperties;
 }
 
-export function Logo({ size = 79, className = '', style }: LogoProps) {
+export function Logo({ className = '', style }: LogoProps) {
   return (
     <img
       src="/images/one.png"
       alt="Sahkaar logo"
-      width={size}
-      height={size}
+      width='79'
+      height='79'
       className={`sahkaar-logo ${className}`}
       style={{
         display: 'inline-block',
