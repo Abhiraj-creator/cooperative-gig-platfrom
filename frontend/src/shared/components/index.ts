@@ -9,6 +9,8 @@
 export { default as TextReveal } from "./TextReveal";
 export { default as TextRoll } from "./TextRoll";
 export { AppShell } from "./AppShell";
+export { Logo } from "./Logo";
 
 // Re-export handler type so consumers don't need to reach into the types folder.
 export type { TextRevealHandler } from "@/types/TextReveal.types";
+

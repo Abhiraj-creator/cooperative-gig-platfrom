@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Blocks, LogOut, Settings, Calendar, Search, Clock, ChevronDown } from 'lucide-react';
+import { LogOut, Settings, Calendar, Search, Clock, ChevronDown } from 'lucide-react';
+import { Logo } from './Logo';
 import { useAuth } from '../../features/auth/hooks/useAuth';
 import { useAppDispatch } from '../../app/hooks';
 import { logout } from '../../features/auth/state/authSlice';
@@ -50,12 +51,12 @@ export function CustomerNavbar() {
   return (
     <header className="customer-navbar" role="banner">
       {/* Brand */}
-      <Link to="/booking" className="customer-brand" aria-label="SAHAAY Home">
+      <Link to="/booking" className="customer-brand" aria-label="SAHKAAR Home">
         <span className="customer-brand-icon" aria-hidden="true">
-          <Blocks size={22} strokeWidth={1.7} />
+          <Logo size={38} />
         </span>
         <span className="customer-brand-text">
-          <strong>SAHAAY</strong>
+          <strong>SAHKAAR</strong>
           <small>For Customers</small>
         </span>
       </Link>

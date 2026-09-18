@@ -14,11 +14,6 @@ export function LoginPage() {
 
   const handleRoleSelect = (role: UserRole) => {
     setSelectedRole(role);
-    if (!email) {
-      if (role === 'worker') setEmail('marcus.worker@coopgig.org');
-      else if (role === 'admin') setEmail('admin@coopgig.org');
-      else setEmail('sarah.customer@coopgig.org');
-    }
   };
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -27,7 +22,7 @@ export function LoginPage() {
 
     try {
       const user = await authService.loginWithCredentials({
-        email: email || (selectedRole === 'worker' ? 'worker@coopgig.org' : 'customer@coopgig.org'),
+        email: email || (selectedRole === 'worker' ? 'worker@coopgig.org' : selectedRole === 'admin' ? 'admin@coopgig.org' : 'customer@coopgig.org'),
         password: password || 'demo123',
         role: selectedRole,
       });
@@ -192,7 +187,7 @@ export function LoginPage() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder={selectedRole === 'worker' ? 'marcus.worker@coopgig.org' : selectedRole === 'admin' ? 'admin@coopgig.org' : 'sarah.customer@coopgig.org'}
+                  placeholder="Enter your email address"
                   className="tech-input"
                   required
                 />

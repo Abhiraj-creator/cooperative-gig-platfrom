@@ -1,9 +1,10 @@
-import { ArrowRight, Blocks, LogOut, UserCheck, Menu, X } from 'lucide-react';
+import { ArrowRight, LogOut, UserCheck, Menu, X } from 'lucide-react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState, type ReactNode } from 'react';
 import LocomotiveScroll from 'locomotive-scroll';
 import 'locomotive-scroll/locomotive-scroll.css';
 import TextRoll from './TextRoll';
+import { Logo } from './Logo';
 import { useAuth } from '../../features/auth/hooks/useAuth';
 import { useAppDispatch } from '../../app/hooks';
 import { logout } from '../../features/auth/state/authSlice';
@@ -138,7 +139,7 @@ export function AppShell({ children }: AppShellProps) {
       >
         <Link className="brand-mark" to="/" aria-label="SAHKAAR home">
           <span className="brand-icon" aria-hidden="true">
-            <Blocks size={24} strokeWidth={1.7} />
+            <Logo size={40} />
           </span>
           <span>
             <strong>SAHKAAR</strong>

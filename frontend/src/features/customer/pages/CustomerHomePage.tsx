@@ -431,23 +431,43 @@ export function CustomerHomePage() {
         </Link>
       </section>
 
-      <footer className="site-footer">
+      <footer className="site-footer" style={{ textAlign: 'center' }}>
         <div className="footer-grid">
           {['Platform', 'For workers', 'For customers', 'Cooperative', 'Legal'].map((title) => (
             <div key={title}>
               <h3>{title}</h3>
-              <a href="/customer#services">Services</a>
-              <a href="/customer#network">How it works</a>
-              <a href="/booking">Request service</a>
+              <a href="/#services">
+                <TextRoll splitBy="chars">Services</TextRoll>
+              </a>
+              <a href="/#network">
+                <TextRoll splitBy="chars">How it works</TextRoll>
+              </a>
+              <a href="/booking">
+                <TextRoll splitBy="chars">Request service</TextRoll>
+              </a>
             </div>
           ))}
         </div>
-        <strong className="footer-word" aria-label="SAHKAAR" style={{ fontSize: 'clamp(2.5rem, 10vw, 7rem)', letterSpacing: '-0.02em', maxWidth: '100%', overflow: 'hidden' }}>
-          {'SAHKAAR'.split('').map((letter, index) => (
-            <span data-letter={letter} key={`${letter}-${index}`}>{letter}</span>
-          ))}
-        </strong>
-        <p>2026 Cooperative Service Network</p>
+        <div style={{ display: 'flex', justifyContent: 'center', width: '100%', marginTop: '48px', overflow: 'hidden' }}>
+          <strong
+            className="footer-word"
+            aria-label="SAHKAAR"
+            style={{
+              fontSize: 'clamp(3.5rem, 14vw, 10.5rem)',
+              letterSpacing: '-0.02em',
+              maxWidth: '100%',
+              display: 'flex',
+              justifyContent: 'center',
+              margin: '0 auto',
+              textAlign: 'center',
+            }}
+          >
+            {'SAHKAAR'.split('').map((letter, index) => (
+              <span data-letter={letter} key={`${letter}-${index}`}>{letter}</span>
+            ))}
+          </strong>
+        </div>
+        <p style={{ textAlign: 'center', marginTop: '16px' }}>2026 Cooperative Service Network</p>
       </footer>
     </main>
   );
