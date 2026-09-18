@@ -51,7 +51,7 @@ export function WorkerNavbar() {
       {/* Brand */}
       <Link to="/worker" className="worker-brand" aria-label="SAHKAAR Worker Portal">
         <span className="worker-brand-icon" aria-hidden="true">
-          <Logo size={38} />
+          <Logo size={79} />
         </span>
         <span className="worker-brand-text">
           <strong>SAHKAAR</strong>
