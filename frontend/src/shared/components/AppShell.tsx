@@ -139,7 +139,7 @@ export function AppShell({ children }: AppShellProps) {
       >
         <Link className="brand-mark" to="/" aria-label="SAHKAAR home">
           <span className="brand-icon" aria-hidden="true">
-            <Logo size={40} />
+            <Logo size={79} />
           </span>
           <span>
             <strong>SAHKAAR</strong>

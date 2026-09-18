@@ -53,7 +53,7 @@ export function CustomerNavbar() {
       {/* Brand */}
       <Link to="/booking" className="customer-brand" aria-label="SAHKAAR Home">
         <span className="customer-brand-icon" aria-hidden="true">
-          <Logo size={38} />
+          <Logo size={79} />
         </span>
         <span className="customer-brand-text">
           <strong>SAHKAAR</strong>

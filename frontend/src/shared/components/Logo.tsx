@@ -11,26 +11,8 @@ export function Logo({ size = 79, className = '', style }: LogoProps) {
     <img
       src="/images/one.png"
       alt="Sahkaar logo"
-      width={
-        {
-          '640px': '50px',
-          '768px': '60px',
-          '1024px': '70px',
-          '1280px': '79px',
-          '1536px': '89px',
-          default: '79px',
-        }[size]
-      }
-      height={
-        {
-          '640px': '50px',
-          '768px': '60px',
-          '1024px': '70px',
-          '1280px': '79px',
-          '1536px': '89px',
-          default: '79px',
-        }[size]
-      }
+      width={size}
+      height={size}
       className={`sahkaar-logo ${className}`}
       style={{
         display: 'inline-block',
