@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { Home, ArrowLeft, Search, ShieldAlert } from 'lucide-react';
+import { Home, ArrowLeft, ShieldAlert } from 'lucide-react';
 import { Logo } from '../components/Logo';
 
 export function NotFoundPage() {
